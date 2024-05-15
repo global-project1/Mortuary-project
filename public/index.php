@@ -2,40 +2,43 @@
 
     session_start();
 
-    $dir = explode('/', $_SERVER['DOCUMENT_ROOT']);
+    $dir = explode('\\', $_SERVER['DOCUMENT_ROOT']);
     array_pop($dir);
-
     $root = implode('/',$dir);
     $_SESSION['root_dir'] = $root;
 
-    $request_method = $_SERVER['REQUEST_METHOD'];
-    
-    include_once $root . '/config/custom_autoload.php';
+    include_once $root . '/config/custom_autoloader.php';
 
+    $request_method = $_SERVER['REQUEST_METHOD'];
     $route = explode('/', $_SERVER['REQUEST_URI'])[1];
 
+    $base = new Base_controller();
+
+    //Enable get requests via the url 
     if($request_method == 'GET' && strpos($route, '?')){
         $route = explode('?', $route)[0];
+    }
+
+    if($_SERVER['REQUEST_URI'] === '/' || $route === ""){
+        $base->home($page = "index");
     }
 
     switch (true){
         case in_array($route, ['login', 'signin']):
             if(isset($_POST)){
-                $userObj = new User_controller();
-                // $userObj->signIn();
+                $base->signIn();
+            }
+            else{
+                $base->home($page = "login");
             }
             break;
-        
-        case in_array($route, ['register', 'signup', 'registration']):
-            if(isset($_POST)){
-                $userObj = new User_controller();
-                // $userObj->register();   
-                // $userObj->insertUser();
-            }
+            
+        case in_array($route, ['dashboard', 'home']):
+            $base->home($page = "dashboard");
             break;
         
         default:
-            require_once $root . '/views/index.php';
+            $base->home($page = "index");
             break;
     }
 
