@@ -37,6 +37,10 @@
             $base->home($page = "dashboard");
             break;
         
+        case $route === 'logout':
+            $base->logout();
+            break;
+
         default:
             $base->home($page = "index");
             break;
