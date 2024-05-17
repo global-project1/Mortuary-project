@@ -232,7 +232,6 @@
                         <td colspan="5"> No Record(s) Found</td>
                     </tr>
                 <?php
-
                 }
                 ?>
 
@@ -255,6 +254,9 @@
         <p>Occupation : <span id="occupation">sometext</span> </p>
         <p>Died At : <span id="age">sometext</span> </p>
         <p>Category : <span id="cat_name">sometext</span> </p>
+        <p>Price/day : <span id="price">sometext</span> </p>
+        <p>Guardian : <span id="guardian_name">sometext</span> </p>
+        <p>Guardian Email : <span id="guardian_email">sometext</span> </p>
         <p>Marital Status : <span id="marital_status">sometext</span> </p>
         <p>Date of Birth : <span id="DOB">sometext</span> </p>
         <p>Mortuary Duration(days) so far : <span id="duration">sometext</span> </p>
