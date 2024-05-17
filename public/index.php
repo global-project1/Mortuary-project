@@ -34,7 +34,14 @@
             break;
             
         case in_array($route, ['dashboard', 'home']):
-            $base->home($page = "dashboard");
+            $dash_obj = new Dashboard_controller();
+
+            if($request_method == "POST"){
+                $dash_obj->examine_post();
+
+            }else{
+                $dash_obj->index();
+            }
             break;
         
         case $route === 'logout':

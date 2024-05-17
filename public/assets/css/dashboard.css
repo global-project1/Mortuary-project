@@ -23,12 +23,13 @@ body{
     justify-content: center;
     padding: 100px 1% 10px;
     gap: 1%;
+    overflow: hidden;
 
     .header{
         display: flex;
         height: 90px;
         position: fixed;
-        top: 1%;
+        top: 0.5%;
         right: 0;
         width: 100%;
         align-items: center;
@@ -54,7 +55,6 @@ body{
             display: flex;
             align-items: center;
             width: 40%; 
-            /* padding-right: 1%; */
         }
           
         .header_search i{
@@ -148,9 +148,8 @@ body{
 
     nav{
         flex: 0.2;   
-        gap: 12%;
         background: transparent;
-        justify-content: start;
+        justify-content: space-between;
         overflow: hidden;
 
         .section1, .section1 div, .section1 div form{
@@ -167,22 +166,23 @@ body{
             gap: 2%;
 
             .title{
-                font-size: 1.3em;
+                font-size: 1.1em;
+                margin-bottom: 1.5%;
             }
               
             div{
                 h3{
-                    width: 100%;
+                    width: 80%;
                     color:rgb(83, 82, 82);
-                    font-size: 1.1em;
-                    padding: 8px;
+                    font-size: 1em;
+                    padding: 5px;
                 }
                 form input{
                     border: none;
                     color: rgb(47, 133, 245);
                     font-size: 1em;
                     width: 100%;
-                    padding: 3% 0;
+                    padding: 1% 0;
                     transition: 0.3s;
                     background: transparent;
 
@@ -225,7 +225,7 @@ body{
         padding-top: 1.5%;
 
         h3{
-            font-size: 1.7em;
+            font-size: 1.4em;
             color:rgb(58, 56, 56)
         }
 
@@ -252,7 +252,7 @@ body{
         
         .msg{
             position: absolute;
-            top: 14%;
+            top: 8%;
 
             &.success{
                 color: green;
@@ -281,7 +281,6 @@ body{
                     padding: 8px 0;
                 }
                 th{
-                    font-size: 1.1em;
                     color: rgb(58, 56, 56);
                 }
                 tr{
@@ -327,12 +326,15 @@ body{
     }
 
     aside{
-        /* display: none; */
+        display: none;
         flex: 0.2;
         border: 2px dashed rgba(165, 44, 236, 0.829);
         padding: 1% 2%;
         align-items: start;
         overflow: scroll;
+        transform-origin: right;
+        transition: display 0.3s ease;
+
 
         &::-webkit-scrollbar{
             scroll-behavior: smooth;
@@ -349,13 +351,12 @@ body{
                 width: 100%;
                 object-fit: cover;
             }
-
         }
 
         p{
             width: 100%;
             padding: 10px 5px;
-            font-size: 1.15em;
+            font-size: 1em;
             font-weight: 500;
             border-bottom: 1px solid lightgrey;
 
@@ -377,13 +378,13 @@ body{
         align-items: center;
         justify-content: start;
         transform-origin: left;
-        /* transform: translateX(-100%); */
+        transform: translateX(-100%);
         transition: transform 0.5s;
         z-index: 1;
 
         .form-section{
             background: aliceblue;
-            padding: 30px 40px;
+            padding: 20px 30px;
             position: relative;
             display: grid;
             place-items: center;
@@ -406,7 +407,8 @@ body{
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                gap: 15px;
+                gap: 10px;
+                font-size: 0.9em;
 
                 h3{
                     color:rgb(46, 118, 212);
@@ -448,9 +450,22 @@ body{
                             transform: translateY(-50%);
                             transition: 0.5s;
                         }
-                    }                    
-                }
+                    }          
+                    
+                    .select-input{
+                        display: flex;
+                        align-items: center;
+                        gap: 5%;
+                        
+                        select{
+                            width: 100%;
+                            padding: 2%;
+                            /* border: none; */
+                            outline: rgb(46, 118, 212);
+                        }
+                    }
 
+                }
                 .textarea{
                     width: 100%;
                     height: 120px;
@@ -498,7 +513,7 @@ body{
         }
         
         .input-part .input input:focus~label, .input-part .input input:valid~label, .textarea textarea:focus~label, .textarea textarea:valid~label{
-            top: -4px;
+            top: -3px;
             font-size: 0.85em;
             color: rgb(46, 118, 212);
         }
@@ -514,33 +529,32 @@ body{
             border-radius: 10px;
         }
         
-        /* Close modal Btn */
-        
-        .form-section .close-btn{
-            position: absolute;
-            background: red;
-            color: white;
-            top: 0;
-            right: 0;
-            width: 40px;
-            height: 40px;
-            display: grid;
-            place-items: center;
-        }
-        
-        .form-section .close-btn i{
-            font-size: 1.3em;
-            font-weight: 600;
-        }
-        
-        .form-section .close-btn:hover, .form-section form input[type="submit"]:hover{
-            opacity: 0.8;
-        }
-        
-        .form-section .close-btn:active, .form-section form input[type="submit"]:active{
-            opacity: 0.5
-        }   
     }
-
+    /* Close modal Btn */
     
+    .close-btn{
+        position: absolute;
+        background: red;
+        color: white;
+        top: 0;
+        right: 0;
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+    }
+    
+    .close-btn i{
+        font-size: 1.3em;
+        font-weight: 600;
+    }
+    
+    .close-btn:hover, form input[type="submit"]:hover{
+        opacity: 0.8;
+    }
+    
+    .close-btn:active, form input[type="submit"]:active{
+        opacity: 0.5
+    }   
+
 }

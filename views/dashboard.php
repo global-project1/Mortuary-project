@@ -1,7 +1,7 @@
 <?php
 
-    $courses = [];
-
+    $categories = $_SESSION['categories'];
+    $corpse = $_SESSION['corpse'] ?? [];
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +23,8 @@
 
         <div class='header_search'>  
         <form action="" method="POST">
-            <input type="text" placeholder="Search for corpse" name="search" /> 
+            <input type="hidden" name="option" value="search">
+            <input type="text" placeholder="Search for corpse by name" name="search" /> 
             <button type="submit">
                 <i class="fas fa-search" title="search"></i>
             </button>  
@@ -44,32 +45,56 @@
                 Logout
             </span>
         </a>
+
     </header>
 
     <nav>
         <div class="section1">
             <h3 class="title">
-                Display Order
+                Display Options
             </h3>
     
             <div>
                 <h3>
                     Category
                 </h3>
+                <?php
+                    if($categories){
+                        foreach($categories as $cat){
+                ?>
                 <form action="" method="POST">
-                    <input type="submit" name="vvip" value="V-VIP">
-                    <input type="submit" name="vip" value="VIP">
-                    <input type="submit" name="standard" value="Standard">
+                    <input type="hidden" name="option" value="order">
+
+                    <input type="hidden" name="order_by_cat" value="<?=$cat['cat_id']?>">
+                    <input type="submit" name="category" value="<?=$cat['cat_name']?>">
+                </form>
+                <?php
+                    } }
+                ?>
+                    
+            </div>
+            <div>
+                <h3>
+                    Date of Death
+                </h3>
+                <form action="" method="POST">
+                    <input type="hidden" name="option" value="order">
+                    <input type="hidden" name="order_by_date" value="date">
+                    <input type="submit" name="asc" value="ASC">
+                    <input type="submit" name="dsc" value="DSC">
                 </form>
             
             </div>
             <div>
                 <h3>
-                    Date
+                    Sex
                 </h3>
                 <form action="" method="POST">
-                    <input type="submit" name="asc" value="ASC">
-                    <input type="submit" name="dsc" value="DSC">
+                    <input type="hidden" name="option" value="order">
+                    <input type="hidden" name="order_by_sex" value="date">
+                    <input type="submit" name="female" value="Females">
+                    <input type="submit" name="male" value="Males">
+
                 </form>
             
             </div>
@@ -118,11 +143,10 @@
                 
             </table>
         </div>
-       
     </nav>
 
     <main >
-        <h3>List of Deceased Individuals <span>(ALL)</span></h3>
+        <h3>List of Deceased Individuals <span>(All)</span></h3>
         <span class="addFile">
             Add Corpse
         </span>
@@ -149,82 +173,77 @@
                     <th>Category</th>
                     <th>Action</th>
                 </tr>
-                <tr>
-                    <td>
-                        <a href="assets/images/test.jpg" target="_blank">
-                            <img src="assets/images/test.jpg" alt="">
-                        </a>
-                    </td>
-                    <td>
-                        Solange
-                    </td>
-                    <td>
-                        2018-02-11
-                    </td>
-                    <td>
-                        VIP
-                    </td>
-                    <td class="link">
-                        <form action="" method="POST">        
-                            <input type="submit" name="view" value="View" data-courseID="<?=$course['pd_id']?>">
-                            
-                            <input type="submit" name="delete" value="Delete">
-                            <input type="hidden" name="hiddenID" value="<?=$course['pd_id']?>">
-
-                        </form>
-                    </td>
-                </tr>
+                
                 <?php 
-                    if($courses):
-                    foreach($courses as $course): 
-                    $price = $course['price'] / 100;
+                    if($corpse){
+                    foreach($corpse as $cor): 
                 ?>
                     <tr>
                         <td>
-                            <img src="assets/images/course_images/<?= $course['pic']?>" alt="">
+                            <img src="assets/images/<?= $cor['picture']?>" alt="">
                         </td>
-                        <td> <?= $course['pd_name']?> </td>
-                        <td> <?= $course['cat_name']?></td>
+                        <td> <?= $cor['fname']?> </td>
+                        <td> <?= $cor['DOD']?></td>
+                        <td> <?= $cor['cat_name']?></td>
+
                         <td class="link">
                             <form action="" method="POST">
+                                <input type="submit" name="view" value="View" data-corID="<?=$cor['id']?>" id="aside_btn">
                                 
-                                <input type="submit" name="view" value="View" data-courseID="<?=$course['pd_id']?>">
-                                
-                                <input type="submit" name="delete" value="Delete">
-                                <input type="hidden" name="hiddenID" value="<?=$course['pd_id']?>">
+                                <input type="submit" name="delete" value="Remove">
+                                <input type="hidden" name="option" value="delete">
+                                <input type="hidden" name="hiddenID" value="<?=$cor['id']?>">
 
                             </form>
                         </td>     
                     </tr>
                 <?php endforeach;
-                endif; ?>
+                    }else{
+                ?>
+                    <tr>
+                        <td colspan="5"> No Record(s) Found</td>
+                    </tr>
+                <?php
+
+                }
+                ?>
 
             </table>
         </div>
     </main>
 
     <aside>
-        <div class="img_sec">
-            <img src="assets/images/test.jpg" alt="">
+        <div class="close-btn" title="close" id="aside">
+            <i class="fas fa-x"></i>
         </div>
-        <p>Deceased ID : <span>sometext</span> </p>
-        <p>Full Names : <span>sometext</span> </p>
-        <p>Gender : <span>sometext</span> </p>
-        <p>Occupation : <span>sometext</span> </p>
-        <p>Life Span : <span>sometext</span> </p>
-        <p>Category : <span>sometext</span> </p>
-        <p>Marital Status : <span>sometext</span> </p>
-        <p>Date of Birth : <span>sometext</span> </p>
-        <p>Date of Death : <span>sometext</span> </p>
-        <p>Cause of Death : <span>sometext</span> </p>
-        <p>Place of Death : <span>sometext</span> </p>
+
+        <div class="img_sec">
+            <img src="assets/images/test.jpg" alt="" id="picture">
+        </div>
+        <p>Deceased ID : <span id="id">sometext</span> </p>
+        <p>First Name : <span id="fname">sometext</span> </p>
+        <p>Last Name : <span id="lname">sometext</span> </p>
+        <p>Gender : <span id="gender">sometext</span> </p>
+        <p>Occupation : <span id="occupation">sometext</span> </p>
+        <p>Died At : <span id="age">sometext</span> </p>
+        <p>Category : <span id="cat_name">sometext</span> </p>
+        <p>Marital Status : <span id="marital_status">sometext</span> </p>
+        <p>Date of Birth : <span id="DOB">sometext</span> </p>
+        <p>Mortuary Duration(days) so far : <span id="duration">sometext</span> </p>
+        <p>Mortuary Duration(days) : <span id="dur">sometext</span> </p>
+        <p>Total price : <span id="total_price">sometext</span>k  frs </p>
+        <p>Date of Death : <span id="DOD">sometext</span> </p>
+        <p>Date Deposited in the Morgue : <span id="deposit_date">sometext</span> </p>
+        <p>Removal Date : <span id="removal_date">sometext</span> </p>
+        <p>Place of Death : <span id="POD">sometext</span> </p>
+        <p>Cause of Death : <span id="cause">sometext</span> </p>
 
     </aside>
 
     <section class="modal">
         <div class="form-section">
 
-            <div class="close-btn" title="close">
+            <div class="close-btn" title="close" id="modal">
                 <i class="fas fa-x"></i>
             </div>
             <img src="" alt="" id="img-preview">
@@ -235,41 +254,107 @@
 
                 <div class="input-part">
                     <div class="input">
-                        <input type="text" id="cname" name="cname" required>
-                        <label for="cname">Course name</label>
+                        <input type="text" id="fname" name="fname" required>
+                        <label for="fname">First name</label>
                     </div>
 
                     <div class="input">
-                    <input type="number" id="price" name="price" required>
-                    <label for="price">Price(in cents)</label>
+                        <input type="text" id="lname" name="lname" required>
+                        <label for="lname">Last name</label>
                     </div>
+                </div>
+
+                <div class="input-part">
+                   <div class="input">
+                        <input type="text" id="occupation" name="occupation" required>
+                        <label for="occupation">Occupation</label>
+                    </div> 
+
+                    <fieldset>
+                        <legend> Real Photo </legend>
+                        <input type="file" onchange="displayImage(this)" name="picture" id="file">
+                    </fieldset> 
+                </div>        
+                
+                <div class="input-part">    
+                    <fieldset>
+                        <legend>Gender</legend>
+                        <div>
+                            <input type="radio" name="sex" value="M" id="acc1" checked/>
+                            <label htmlFor="acc1">Male</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="sex" value="F" id="acc2"/>
+                            <label htmlFor="acc2">Female</label>
+                        </div>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>Marital Status</legend>
+                        <div>
+                            <input type="radio" name="married" value="Y" id="ms1"/>
+                            <label htmlFor="ms1">Married</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="married" value="N" id="acc2" checked/>
+                            <label for="ms2" >Single</label>
+                        </div>
+
+                    </fieldset>   
                 </div>
             
                 <div class="input-part">    
                     <div class="input">
-                        <input type="number" id="number" name="chapters" required>
-                        <label for="number">Number of chapters</label>
+                        <input type="date" id="dob" name="DOB">
+                        <label for="dob">Date of Birth</label>
                     </div> 
 
-                    <fieldset>
-                        <legend>Course Image</legend>
-                        <input type="file" onchange="displayImage(this)" name="course_img" id="file" required>
-                    </fieldset> 
-                    
                     <div class="input">
-                        <input type="text" id="cat" name="category" required>
-                        <label for="cat">Category</label>
+                        <input type="date" id="dod" name="DOD">
+                        <label for="dod">Date of Death</label>
+                    </div> 
+                </div> 
+
+                <div class="input-part">    
+                    <div class="input">
+                        <input type="date" id="dodepo" name="dodepo">
+                        <label for="dodepo">Date of Deposit</label>
                     </div> 
 
-                </div>
+                    <div class="input">
+                        <input type="date" id="dor" name="dor">
+                        <label for="dor">Date of Removal</label>
+                    </div> 
+                </div> 
 
+                <div class="input-part">
+                    <div class="select-input">
+                        <label for="corpse_cat">Category: </label>
+                        
+                        <select name="corpse_cat" id="corpse_cat">
+                            <?php
+                                if($categories){
+                                    foreach($categories as $cat){
+                            ?>
+                            <option value="<?=$cat['cat_id']?>"><?=$cat['cat_name']?></option>
+                            <?php
+                                } }
+                            ?>
+                        </select>
+                    </div> 
+
+                    <div class="input">
+                        <input type="text" id="place" name="place" required>
+                        <label for="place">Place of Death</label>
+                    </div>
+                </div>
+                
                 <div class="textarea">
                     <textarea name="text" id="text" required></textarea>
-                    <label for="text">Enter description here !!</label>
-
+                    <label for="text">Brief Cause of Death !!</label>
                 </div>
 
-                <input type="submit" name="add" value="Add" id="submit">
+                <input type="submit" name="add_corpse" value="Add" id="submit">
                 
             </form>
         </div>
