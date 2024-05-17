@@ -44,6 +44,10 @@
                     $this->search();
                     break;
 
+                case 'delete':
+                    $this->remove();
+                    break;
+
                 default:
                     $this->render();
                     break;
@@ -85,9 +89,29 @@
         // Search method
 
         function search(){
-            
             $search_string = $_POST['search'];
-            
+
+            for($i = strlen($search_string); $i > 0; $i--){
+                $string = '';
+                for($j = 0; $j < $i; $j++){
+                    $string .= $search_string[$j]; 
+                }
+
+                $cond = "WHERE fname like '%$string%' OR lname like '%$string%'";
+
+                [$state, $data] = $this->dsc_obj->get_corpse($cond);
+                if($state){
+                    break;
+                }
+            }
+            $_SESSION['corpse'] = ($state) ? $data : array();
+            $this->render();
+        }
+
+        function remove(){
+            $this->dsc_obj->delete_corpse($_POST['hiddenID']);
+
+            $this->index();
         }
     }
 

@@ -71,11 +71,11 @@
             }       
         }
 
-        function read_one($unq_col = null, $value = null){
+        function read_one($value = null){
             try{
                 $value = $this->conn->escapeString($value);
     
-                $select = "SELECT * FROM {$this->tableName} WHERE $unq_col = ?";
+                $select = "SELECT * FROM {$this->tableName} WHERE id = ?";
                 $stmt = $this->conn->prepare($select);
                 $stmt->bindValue(1, $value);
                 $result = $stmt->execute();
@@ -114,8 +114,8 @@
             return true;
         }
 
-        function delete_one($unq_col, $value){
-            $data = $this->read_one($unq_col, $value);
+        function delete_one($value){
+            $data = $this->read_one($value);
             
             if(!$data){    
                 return false;
@@ -128,7 +128,7 @@
                 }
             }
 
-            $delete = "DELETE FROM $this->tableName WHERE $unq_col = ?";
+            $delete = "DELETE FROM $this->tableName WHERE id = ?";
             $stmt = $this->conn->prepare($delete);
 
             $stmt->bindValue(1, $value);
