@@ -2,6 +2,34 @@
 
     $categories = $_SESSION['categories'];
     $corpse = $_SESSION['corpse'] ?? [];
+
+    $total_corpse = count($_SESSION['all_corpse']);
+    $males = $females = $vip = $vvip = $standard = $young = $adult = 0;
+
+    function age($dob, $dod){
+        $yob = (int)explode('-', $dob)[0];
+        $yod = (int)explode('-', $dod)[0];
+
+        return $yod-$yob;
+    }
+
+    foreach($_SESSION['all_corpse'] as $corp){
+        extract($corp);
+
+        ($gender === 'M') ? $males++ : $females++;
+        (age($DOB, $DOD) <= 18) ? $young++ : $adult++;
+
+        if($cat_name === 'VIP'){
+            $vip++;
+        }elseif($cat_name === 'VVIP'){
+            $vvip++;
+        }else{
+            $standard++;
+        }
+  
+    }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -102,43 +130,43 @@
 
         <div class="section2">
             <h3>
-                Records
+                Overall Records
             </h3>
             <table>
                 <tr>
                     <th colspan="2"> Total </th>
-                    <th>2</th>
+                    <th><?=$total_corpse?></th>
                 </tr>
                 <tr>
                     <th rowspan="2">Sex</th>
                     <td>Males</td>
-                    <td>6</td>
+                    <td><?=$males?></td>
                 </tr>
                 <tr>
                     <td>Females</td>
-                    <td>7</td>
+                    <td><?=$females?></td>
                 </tr> 
                 <tr>
                     <th rowspan="2">Age</th>
                     <td>18 --</td>
-                    <td>1 </td>
+                    <td> <?=$young?> </td>
                 </tr> 
                 <tr>
                     <td>19 ++</td>
-                    <td>3</td>
+                    <td> <?=$adult?> </td>
                 </tr> 
                 <tr>
                     <th rowspan="3">Category</th>
                     <td>V-VIP</td>
-                    <td>3</td>
+                    <td><?=$vvip?></td>
                 </tr> 
                 <tr>
                     <td>Standard</td>
-                    <td>1</td>
+                    <td><?=$standard?></td>
                 </tr> 
                 <tr>
                     <td>VIP</td>
-                    <td>2</td>
+                    <td> <?=$vip?> </td>
                 </tr>
                 
             </table>

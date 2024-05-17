@@ -135,7 +135,6 @@
             else{
                 $_SESSION['dash_msg'] = ['status' =>true, 'msg' => "Error deleting user"];
             }
-
             return;
         }
 

@@ -120,7 +120,6 @@
             if(!$data){    
                 return false;
             }
-
             if($data['picture'] !== 'default.jpg'){
                 $file1 = 'assets/images/'.$data['picture'];
                 if(file_exists($file1)){
@@ -136,10 +135,7 @@
             if(! $stmt->execute()){   
                 return false;
             }
-
             return true;   
         }
-
     }
-
 ?>
