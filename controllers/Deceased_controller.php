@@ -130,20 +130,23 @@
 
         function delete_all_corpse(){
             if($this->dsc_obj->delete_all()){
-                echo "users deleted successfully";
+                $_SESSION['dash_msg'] = ['status' =>true, 'msg' => "user deleted successfully"];
             }
             else{
-                echo "Error deleting users";
+                $_SESSION['dash_msg'] = ['status' =>true, 'msg' => "Error deleting user"];
             }
+
+            return;
         }
 
-        function delete_corpse($col, $id){
-            if($this->dsc_obj->delete_one($col, $id)){
-                echo "user deleted successfully";
+        function delete_corpse($id){
+            if($this->dsc_obj->delete_one($id)){
+                $_SESSION['dash_msg'] = ['status' =>true, 'msg' => "user deleted successfully"];
             }
             else{
-                echo "Error deleting user";
+                $_SESSION['dash_msg'] = ['status' =>true, 'msg' => "Error deleting user"];
             }
+            return;
         }
     }
 ?>

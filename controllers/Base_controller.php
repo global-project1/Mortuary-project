@@ -21,10 +21,6 @@
             
         }
 
-        function dash(){
-            
-        }
-
         function logout(){
             session_destroy();
             header("Location: /index");
