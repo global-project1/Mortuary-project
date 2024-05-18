@@ -13,6 +13,9 @@
     $route = explode('/', $_SERVER['REQUEST_URI'])[1];
 
     $base = new Base_controller();
+    $desease = new employees();
+    $results = $desease->add_employee();
+
 
     //Enable get requests via the url 
     if($request_method == 'GET' && strpos($route, '?')){
@@ -22,10 +25,13 @@
     if($_SERVER['REQUEST_URI'] === '/' || $route === ""){
         $base->home($page = "index");
     }
+    // echo '<pre>';
+    // print_r($_SERVER);
+    // die;
 
     switch (true){
         case in_array($route, ['login', 'signin']):
-            if(isset($_POST)){
+            if($request_method == 'POST'){
                 $base->signIn();
             }
             else{
@@ -39,6 +45,10 @@
         
         default:
             $base->home($page = "index");
+            break;
+
+        case in_array($route, ['otp']):
+            $base->home($page = "otp");
             break;
     }
 
