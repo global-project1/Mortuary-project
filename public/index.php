@@ -38,7 +38,6 @@
 
             if($request_method == "POST"){
                 $dash_obj->examine_post();
-
             }else{
                 $dash_obj->index();
             }
@@ -52,6 +51,4 @@
             $base->home($page = "index");
             break;
     }
-
-
 ?>

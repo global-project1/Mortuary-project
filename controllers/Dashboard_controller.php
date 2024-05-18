@@ -55,7 +55,7 @@
         }
 
         private function add(){
-           $this->dsc_obj->set_picture();
+            $this->dsc_obj->set_picture();
             $this->dsc_obj->add_corpse();
 
             $this->index();
@@ -78,10 +78,8 @@
 
                 }else{
                     $condition = "WHERE gender = 'M'";
-
                 }
             }
-
             $this->get_corpse($condition);
             $this->render();
         }

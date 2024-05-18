@@ -284,20 +284,20 @@
 
                 <div class="input-part">
                     <div class="input">
-                        <input type="text" id="fname" name="fname" required>
-                        <label for="fname">First name</label>
+                        <input type="text" id="f_name" name="fname" required>
+                        <label for="f_name">First name</label>
                     </div>
 
                     <div class="input">
-                        <input type="text" id="lname" name="lname" required>
-                        <label for="lname">Last name</label>
+                        <input type="text" id="l_name" name="lname" required>
+                        <label for="l_name">Last name</label>
                     </div>
                 </div>
 
                 <div class="input-part">
                    <div class="input">
-                        <input type="text" id="occupation" name="occupation" required>
-                        <label for="occupation">Occupation</label>
+                        <input type="text" id="Occupation" name="occupation" required>
+                        <label for="Occupation">Occupation</label>
                     </div> 
 
                     <fieldset>
@@ -335,14 +335,15 @@
             
                 <div class="input-part">    
                     <div class="input">
-                        <input type="date" id="dob" name="DOB">
-                        <label for="dob">Date of Birth</label>
+                        <input type="date" id="DOB" name="DOB">
+                        <label for="DOB">Date of Birth</label>
                     </div> 
 
                     <div class="input">
-                        <input type="date" id="dod" name="DOD">
-                        <label for="dod">Date of Death</label>
+                        <input type="date" id="DOD" name="DOD">
+                        <label for="DOD">Date of Death</label>
                     </div> 
+                    
                 </div> 
 
                 <div class="input-part">    
@@ -378,9 +379,28 @@
                         <label for="place">Place of Death</label>
                     </div>
                 </div>
+
+                <div class="input-part">
+                    <div class="input">
+                        <input type="text" id="gname" name="gname" required>
+                        <label for="gname">Guardian's name</label>
+                    </div>
+
+                    <div class="input">
+                        <input type="email" id="g_email" name="g_email" required>
+                        <label for="g_email">Guardian's email</label>
+                    </div>                    
+                </div>
+
+                <div class="input-part">
+                    <div class="input">
+                        <input type="text" id="relation" name="relation" required>
+                        <label for="relation">Guardian's relation</label>
+                    </div>            
+                </div>
                 
                 <div class="textarea">
-                    <textarea name="text" id="text" required></textarea>
+                    <textarea name="cause" id="text" required></textarea>
                     <label for="text">Brief Cause of Death !!</label>
                 </div>
 

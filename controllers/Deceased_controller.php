@@ -78,7 +78,7 @@
 
         // rename the profile pic from file
 
-        public function renameFile($fileExt, $xters, $table){
+        public function renameFile($fileExt = null, $xters = null, $table = null){
             $id = 1;
             $oldId =  $_SESSION['root_dir'] . "/models/storage/id.txt";
 
@@ -100,6 +100,7 @@
         // Register corpse now
 
         public function add_corpse(){   
+            $g_email = $_POST['g_email'];
             [$state, $msg] = $this->dsc_obj->save($_POST, $this->photo);
             
             if($state){
@@ -109,6 +110,7 @@
                     move_uploaded_file($this->tmp_dir, $targetDir);
                     $_SESSION['dash_msg'] = ['status' =>true, 'msg' => 'Corpse added successfully'];
 
+                    // send mail to the guardian
                     return;
 
                 }catch(Exception $e){
