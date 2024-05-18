@@ -8,12 +8,12 @@
         }
 
         function set_picture(){
-            if(isset($_FILES['picture'])){
+            if(! empty($_FILES['picture']['name'])){
                 $this->photo = $this->profilePicHandler($_FILES['picture']);
-                return true;
+                return $this->photo;
             }
             else{
-                return false;
+                return null;
             }
         }
         // Profile pic handler
@@ -134,9 +134,29 @@
             return $this->dsc_obj->read($cond);
         }
 
-        function update_corpse(){
+        function update_corpse($string, $id){      
+            [$state, $msg] = $this->dsc_obj->update($string, $id);
+            if(! $state){
+                $_SESSION['dash_msg'] = array( 
+                    'status' => false,
+                    'msg' => "An error occured while updating the corpse information"
+                );
 
+            }else{
+                // Upload the image to the img_dir
+                $targetDir = "assets/images/{$this->photo}";
+                try{
+                    move_uploaded_file($this->tmp_dir, $targetDir);
+                    $_SESSION['dash_msg'] = ['status' =>true, 'msg' => 'corpse information updated successfully'];
+                    return;
+
+                }catch(Exception $e){
+                    $_SESSION['dash_msg'] = ['status' =>false, 'msg' => 'Error updating the image'];
+                }
+
+            }
         }
+
         function delete_all_corpse(){
             if($this->dsc_obj->delete_all()){
                 $_SESSION['dash_msg'] = ['status' =>true, 'msg' => "user deleted successfully"];

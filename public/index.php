@@ -47,12 +47,14 @@
             $base->logout();
             break;
 
+        case in_array($route, ['otp']):
+            $base->home($page = "otp");
+            break;
+            
         default:
             $base->home($page = "index");
             break;
 
-        case in_array($route, ['otp']):
-            $base->home($page = "otp");
-            break;
-    }
+    }   
+
 ?>

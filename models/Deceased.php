@@ -112,8 +112,22 @@
             }
         }
 
-        function update(){
-            
+        function update($string, $id){    
+            try{
+                $insert = "UPDATE {$this->tableName} SET $string WHERE id = ?";
+
+                $stmt = $this->conn->prepare($insert);
+                $stmt->bindValue(1, $id);
+
+                if(! $stmt->execute()){
+                    return [False, $this->conn->lastErrorMsg()];   
+                }
+
+                return [True, "success"];        
+            }
+            catch(\SQLite3Exception $e){
+                return [False, $e];         
+            }  
         }
 
         function delete_all(){

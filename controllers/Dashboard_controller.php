@@ -59,20 +59,50 @@
         }
 
         private function add(){
-            $this->dsc_obj->set_picture();
+            $pic = $this->dsc_obj->set_picture();
             $this->dsc_obj->add_corpse();
 
             $this->index();
         }
 
         private function edit(){
-            $existing_data = $new_data = '';
-            echo '<pre>';
-            print_r($_SESSION['all_corpse']);
+            // check if any info has been updated
+            $existing_data = array();
+            $id = $_POST['id'];
 
-            echo "This unique";
-            print_r($_POST);
-            die;
+            foreach($_SESSION['all_corpse'] as $corpse){
+                if ($corpse['id'] = $id){
+                    $existing_data = $corpse;
+                }
+            }
+
+            $update_string = "";
+            $photo = $this->dsc_obj->set_picture();
+
+            foreach($_POST as $key => $value){
+                if(isset($existing_data[$key])){
+                   if($existing_data[$key] != $value){
+                        $update_string .= $key .' = \''.$value . '\', ';
+                   }
+                }
+            }
+
+            if(! $update_string && ! $photo){
+                $_SESSION['dash_msg'] = array( 
+                    'status' => false,
+                    'msg' => "There is nothing to update"
+                );
+                $this->render();
+            }
+            else{
+                if($photo){
+                    $update_string .= ' picture = \'' .$photo .'\'';
+                }
+
+                $this->dsc_obj->update_corpse($update_string, $id);
+                
+                $this->index();
+            }
         }
 
         private function order(){

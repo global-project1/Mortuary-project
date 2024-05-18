@@ -255,7 +255,7 @@ body{
         
         .msg{
             position: absolute;
-            top: 8%;
+            top: 7.3%;
 
             &.success{
                 color: green;
