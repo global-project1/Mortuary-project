@@ -1,7 +1,7 @@
 <?php
 
     class Deceased_controller{
-        private $photo, $dsc_obj, $tmp_dir;
+        private $photo = null, $dsc_obj, $tmp_dir;
 
         function __construct(){
             $this->dsc_obj = new Deceased();           
@@ -10,6 +10,10 @@
         function set_picture(){
             if(isset($_FILES['picture'])){
                 $this->photo = $this->profilePicHandler($_FILES['picture']);
+                return true;
+            }
+            else{
+                return false;
             }
         }
         // Profile pic handler
@@ -88,7 +92,7 @@
                 $id ++;
             }
 
-            $new_name = $xters.$id.'.'.$fileExt;
+            $new_name = str_shuffle($xters.$id).'.'.$fileExt;
 
             $fp = fopen($oldId, 'w');
             fwrite($fp, $id);
@@ -100,7 +104,7 @@
         // Register corpse now
 
         public function add_corpse(){   
-            $g_email = $_POST['g_email'];
+            $g_email = $_POST['guardian_email'];
             [$state, $msg] = $this->dsc_obj->save($_POST, $this->photo);
             
             if($state){
@@ -130,6 +134,9 @@
             return $this->dsc_obj->read($cond);
         }
 
+        function update_corpse(){
+
+        }
         function delete_all_corpse(){
             if($this->dsc_obj->delete_all()){
                 $_SESSION['dash_msg'] = ['status' =>true, 'msg' => "user deleted successfully"];

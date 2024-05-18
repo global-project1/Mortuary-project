@@ -2,7 +2,7 @@
 
 function displayImage(e){
     if(e.files[0]){
-        const img = document.querySelector('#img-preview')
+        const img = document.querySelector('.modal #picture')
         img.style.display = "block";
 
         img.setAttribute('src', URL.createObjectURL(e.files[0]))

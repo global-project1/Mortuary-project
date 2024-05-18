@@ -26,10 +26,7 @@
         }else{
             $standard++;
         }
-  
     }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -123,8 +120,7 @@
                     <input type="submit" name="female" value="Females">
                     <input type="submit" name="male" value="Males">
 
-                </form>
-            
+                </form>    
             </div>
         </div>
 
@@ -240,81 +236,82 @@
     </main>
 
     <aside>
-        <div class="close-btn" title="close" id="aside">
-            <i class="fas fa-x"></i>
-        </div>
+        <button id="modal_edit">
+            <i class="fas fa-pen"></i>
+            <span>Edit</span>
+        </button>
+
+        <i class="fas fa-x close-btn" id="aside" title="close"></i>
 
         <div class="img_sec">
-            <img src="assets/images/test.jpg" alt="" id="picture">
+            <img src="" alt="" class="picture">
         </div>
-        <p>Deceased ID : <span id="id">sometext</span> </p>
-        <p>First Name : <span id="fname">sometext</span> </p>
-        <p>Last Name : <span id="lname">sometext</span> </p>
-        <p>Gender : <span id="gender">sometext</span> </p>
-        <p>Occupation : <span id="occupation">sometext</span> </p>
-        <p>Died At : <span id="age">sometext</span> </p>
-        <p>Category : <span id="cat_name">sometext</span> </p>
-        <p>Price/day : <span id="price">sometext</span> </p>
-        <p>Guardian : <span id="guardian_name">sometext</span> </p>
-        <p>Guardian Email : <span id="guardian_email">sometext</span> </p>
-        <p>Marital Status : <span id="marital_status">sometext</span> </p>
-        <p>Date of Birth : <span id="DOB">sometext</span> </p>
-        <p>Mortuary Duration(days) so far : <span id="duration">sometext</span> </p>
-        <p>Mortuary Duration(days) : <span id="dur">sometext</span> </p>
-        <p>Total price : <span id="total_price">sometext</span>k  frs </p>
-        <p>Date of Death : <span id="DOD">sometext</span> </p>
-        <p>Date Deposited in the Morgue : <span id="deposit_date">sometext</span> </p>
-        <p>Removal Date : <span id="removal_date">sometext</span> </p>
-        <p>Place of Death : <span id="POD">sometext</span> </p>
-        <p>Cause of Death : <span id="cause">sometext</span> </p>
+
+        <p>Deceased ID : <span class="id">sometext</span> </p>
+        <p>First Name : <span class="fname">sometext</span> </p>
+        <p>Last Name : <span class="lname">sometext</span> </p>
+        <p>Gender : <span class="gender">sometext</span> </p>
+        <p>Occupation : <span class="occupation">sometext</span> </p>
+        <p>Died At : <span class="age">sometext</span> </p>
+        <p>Category : <span class="cat_name">sometext</span> </p>
+        <p>Price/day : <span class="price">sometext</span> frs</p>
+        <p>Guardian : <span class="guardian_name">sometext</span> </p>
+        <p>Guardian Email : <span class="guardian_email">sometext</span> </p>
+        <p>Marital Status : <span class="marital_status">sometext</span> </p>
+        <p>Date of Birth : <span class="DOB">sometext</span> </p>
+        <p>Mortuary Duration so far : <span class="duration">sometext</span> days</p>
+        <p>Supposed Duration : <span class="dur">sometext</span> days</p>
+        <p>Total price : <span class="total_price">sometext</span>k  frs </p>
+        <p>Date of Death : <span class="DOD">sometext</span> </p>
+        <p>Date Deposited in the Morgue : <span class="deposit_date">sometext</span> </p>
+        <p>Removal Date : <span class="removal_date">sometext</span> </p>
+        <p>Place of Death : <span class="POD">sometext</span> </p>
+        <p>Cause of Death : <span class="cause">sometext</span> </p>
 
     </aside>
 
     <section class="modal">
         <div class="form-section">
+            
+            <i class="fas fa-x close-btn" id="modal" title="close"></i>
 
-            <div class="close-btn" title="close" id="modal">
-                <i class="fas fa-x"></i>
-            </div>
-            <img src="" alt="" id="img-preview">
             <form action="" method="POST" enctype="multipart/form-data">
+                <img src="assets/images/default.jpg" alt="" id="picture">
                 <h3>Enter Deceased Details</h3>
 
                 <input type="hidden" id="hidden" name="option" value="add">
 
                 <div class="input-part">
                     <div class="input">
-                        <input type="text" id="f_name" name="fname" required>
-                        <label for="f_name">First name</label>
+                        <input type="text" id="fname" name="fname" required>
+                        <label for="fname">First name</label>
                     </div>
 
                     <div class="input">
-                        <input type="text" id="l_name" name="lname" required>
-                        <label for="l_name">Last name</label>
+                        <input type="text" id="lname" name="lname" required>
+                        <label for="lname">Last name</label>
                     </div>
+
+                    <div class="input">
+                        <input type="text" id="occupation" name="occupation" required>
+                        <label for="occupation">Occupation</label>
+                    </div> 
                 </div>
 
                 <div class="input-part">
-                   <div class="input">
-                        <input type="text" id="Occupation" name="occupation" required>
-                        <label for="Occupation">Occupation</label>
-                    </div> 
-
                     <fieldset>
                         <legend> Real Photo </legend>
                         <input type="file" onchange="displayImage(this)" name="picture" id="file">
                     </fieldset> 
-                </div>        
-                
-                <div class="input-part">    
+
                     <fieldset>
                         <legend>Gender</legend>
                         <div>
-                            <input type="radio" name="sex" value="M" id="acc1" checked/>
+                            <input type="radio" name="gender" value="M" id="acc1" checked/>
                             <label htmlFor="acc1">Male</label>
                         </div>
                         <div>
-                            <input type="radio" name="sex" value="F" id="acc2"/>
+                            <input type="radio" name="gender" value="F" id="acc2"/>
                             <label htmlFor="acc2">Female</label>
                         </div>
                     </fieldset>
@@ -322,16 +319,16 @@
                     <fieldset>
                         <legend>Marital Status</legend>
                         <div>
-                            <input type="radio" name="married" value="Y" id="ms1"/>
+                            <input type="radio" name="marital_status" value="Y" id="ms1"/>
                             <label htmlFor="ms1">Married</label>
                         </div>
                         <div>
-                            <input type="radio" name="married" value="N" id="acc2" checked/>
+                            <input type="radio" name="marital_status" value="N" id="acc2" checked/>
                             <label for="ms2" >Single</label>
                         </div>
-
+    
                     </fieldset>   
-                </div>
+                </div>        
             
                 <div class="input-part">    
                     <div class="input">
@@ -344,25 +341,22 @@
                         <label for="DOD">Date of Death</label>
                     </div> 
                     
+                    <div class="input">
+                        <input type="date" id="deposit_date" name="deposit_date">
+                        <label for="deposite_date">Date of Deposit</label>
+                    </div> 
                 </div> 
 
                 <div class="input-part">    
-                    <div class="input">
-                        <input type="date" id="dodepo" name="dodepo">
-                        <label for="dodepo">Date of Deposit</label>
-                    </div> 
 
                     <div class="input">
-                        <input type="date" id="dor" name="dor">
-                        <label for="dor">Date of Removal</label>
+                        <input type="date" id="removal_date" name="removal_date">
+                        <label for="removal_date">Date of Removal</label>
                     </div> 
-                </div> 
-
-                <div class="input-part">
                     <div class="select-input">
                         <label for="corpse_cat">Category: </label>
                         
-                        <select name="corpse_cat" id="corpse_cat">
+                        <select name="cat_id" id="corpse_cat">
                             <?php
                                 if($categories){
                                     foreach($categories as $cat){
@@ -373,35 +367,33 @@
                             ?>
                         </select>
                     </div> 
-
+    
                     <div class="input">
-                        <input type="text" id="place" name="place" required>
-                        <label for="place">Place of Death</label>
+                        <input type="text" id="POD" name="POD" required>
+                        <label for="POD">Place of Death</label>
                     </div>
-                </div>
+                </div> 
 
                 <div class="input-part">
                     <div class="input">
-                        <input type="text" id="gname" name="gname" required>
-                        <label for="gname">Guardian's name</label>
+                        <input type="text" id="guardian_name" name="guardian_name" required>
+                        <label for="guardian_name">Guardian's name</label>
                     </div>
 
                     <div class="input">
-                        <input type="email" id="g_email" name="g_email" required>
-                        <label for="g_email">Guardian's email</label>
-                    </div>                    
-                </div>
+                        <input type="email" id="guardian_email" name="guardian_email" required>
+                        <label for="guardian_email">Guardian's email</label>
+                    </div>    
 
-                <div class="input-part">
                     <div class="input">
-                        <input type="text" id="relation" name="relation" required>
-                        <label for="relation">Guardian's relation</label>
+                        <input type="text" id="guardian_relation" name="guardian_relation" required>
+                        <label for="guardian_relation">Guardian's relation</label>
                     </div>            
                 </div>
                 
                 <div class="textarea">
-                    <textarea name="cause" id="text" required></textarea>
-                    <label for="text">Brief Cause of Death !!</label>
+                    <textarea name="cause" id="cause" required></textarea>
+                    <label for="cause">Brief Cause of Death !!</label>
                 </div>
 
                 <input type="submit" name="add_corpse" value="Add" id="submit">

@@ -37,7 +37,7 @@
                 $insert = "INSERT INTO {$this->tableName} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 $stmt = $this->conn->prepare($insert);
-                $array = array($key, $fname, $lname, $occupation, $married, $sex, $DOB, $DOD, $place, $cause, $dodepo, $dor, $photo, $corpse_cat, $gname, $g_email, $relation);
+                $array = array($key, $fname, $lname, $occupation, $marital_status, $gender, $DOB, $DOD, $POD, $cause, $deposit_date, $removal_date, $photo, $cat_id, $guardian_name, $guardian_email, $guardian_relation);
 
                 for($i = 0; $i < count($array); $i++){
                     $stmt->bindValue($i+1, $array[$i]);
@@ -110,6 +110,10 @@
             catch(Exception $e){
                 return false;
             }
+        }
+
+        function update(){
+            
         }
 
         function delete_all(){

@@ -35,6 +35,10 @@
                 case 'add':
                     $this->add();
                     break;
+
+                case 'edit':
+                    $this->edit();
+                    break;
                 
                 case 'order':
                     $this->order();
@@ -59,6 +63,15 @@
             $this->dsc_obj->add_corpse();
 
             $this->index();
+        }
+
+        private function edit(){
+            $existing_data = $new_data = '';
+            print_r($_SESSION['all_corpse']);
+
+            echo "This unique";
+            print_r($_POST);
+            die;
         }
 
         private function order(){
