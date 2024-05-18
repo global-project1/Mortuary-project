@@ -25,7 +25,7 @@
 
     switch (true){
         case in_array($route, ['login', 'signin']):
-            if(isset($_POST)){
+            if($request_method == 'POST'){
                 $base->signIn();
             }
             else{
@@ -49,6 +49,10 @@
 
         default:
             $base->home($page = "index");
+            break;
+
+        case in_array($route, ['otp']):
+            $base->home($page = "otp");
             break;
     }
 ?>

@@ -67,6 +67,7 @@
 
         private function edit(){
             $existing_data = $new_data = '';
+            echo '<pre>';
             print_r($_SESSION['all_corpse']);
 
             echo "This unique";
