@@ -58,7 +58,7 @@
             }
         }
 
-        private function add(){
+        private function add(){  
             $pic = $this->dsc_obj->set_picture();
             $this->dsc_obj->add_corpse();
 

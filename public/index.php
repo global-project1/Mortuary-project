@@ -2,6 +2,10 @@
 
     session_start();
 
+    set_error_handler(function($errno, $errstr, $errfile, $errline) {
+        return true; // Suppress the warning
+    });
+
     $dir = explode('\\', $_SERVER['DOCUMENT_ROOT']);
     array_pop($dir);
     $root = implode('/',$dir);

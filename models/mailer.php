@@ -6,7 +6,6 @@
     $dotenv->load();
 
     use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailerPHPMailerException;
 
     $mail = new PHPMailer(true);
     $mail->isSMTP();

@@ -213,7 +213,6 @@
                         <td class="link">
                             <form action="" method="POST">
                                 <input type="submit" name="view" value="View" data-corID="<?=$cor['id']?>" id="aside_btn">
-                                
                                 <input type="submit" name="delete" value="Remove">
                                 <input type="hidden" name="option" value="delete">
                                 <input type="hidden" name="hiddenID" value="<?=$cor['id']?>">

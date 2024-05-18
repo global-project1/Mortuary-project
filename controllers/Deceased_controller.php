@@ -104,15 +104,14 @@
         // Register corpse now
 
         public function add_corpse(){   
-            $g_email = $_POST['guardian_email'];
             [$state, $msg] = $this->dsc_obj->save($_POST, $this->photo);
             
-            if($state){
+            if($state){     
                 // Upload the image to the img_dir
                 $targetDir = "assets/images/{$this->photo}";
                 try{
                     move_uploaded_file($this->tmp_dir, $targetDir);
-                    $_SESSION['dash_msg'] = ['status' =>true, 'msg' => 'Corpse added successfully'];
+                    $_SESSION['dash_msg'] = ['status' =>true, 'msg' => 'Corpse added successfully and '. $msg];
 
                     // send mail to the guardian
                     return;
@@ -122,10 +121,7 @@
                 }
             }else{
                 $_SESSION['dash_msg'] = ['status' =>false, 'msg' => $msg];
-            }  
-
-            header("Location: /dashboard");
-            exit();    
+            }   
         }
         
         //Get corpse
@@ -153,7 +149,6 @@
                 }catch(Exception $e){
                     $_SESSION['dash_msg'] = ['status' =>false, 'msg' => 'Error updating the image'];
                 }
-
             }
         }
 
