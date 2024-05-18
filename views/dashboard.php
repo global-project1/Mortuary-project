@@ -63,6 +63,13 @@
                 </span>
             </i>
         </button>
+        
+        <a href="" class="modify">
+            <i class="fas fa-pen"></i>
+            <span>
+                Categories
+            </span>
+        </a>
 
         <a href="/logout" class="logout">
             <i class="fas fa-power-off"></i>
@@ -70,7 +77,7 @@
                 Logout
             </span>
         </a>
-
+        
     </header>
 
     <nav>

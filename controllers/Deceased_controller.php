@@ -16,8 +16,8 @@
                 return null;
             }
         }
-        // Profile pic handler
 
+        // Profile pic handler
         public function profilePicHandler($setPicture, $table=null){
             $ext = $this->profilePicVerify($setPicture);
 
@@ -29,6 +29,7 @@
                 header("Location: /dashboard");
                 exit(); 
             }
+            
             // I need the length of the lone name, inorder to produce a new name of atmost 3 xters
             $len = strlen($ext[1]);
             $name = ($len > 2)? substr($ext[1], 0, 2): $ext[1];

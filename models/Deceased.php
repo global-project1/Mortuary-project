@@ -30,7 +30,7 @@
                     $message = 
                     <<<EOF
                     The registered corp ID for $fname $lname is <br>
-                    <h2> $key <h2>;
+                    <h2> $key <h2>
                     Please keep it carefully and securely.
                     On corpse removal, you'll be asked for this key
     
@@ -38,7 +38,6 @@
     
                    return $this->send_mail($guardian_email, $title, $message);     
                 }
-
             }
             catch(\SQLite3Exception $e){
                 return [False, $e];         

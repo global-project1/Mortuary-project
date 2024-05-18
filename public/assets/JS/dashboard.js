@@ -30,8 +30,6 @@ $(document).ready(function (){
     })
     
     function setModal(){
-        console.log(corpseInfo)
-        
         // Change the option of the form
         $('.form-section form #hidden').val('edit')
 
@@ -133,5 +131,12 @@ $(document).ready(function (){
         $('aside .total_price').text(price)
     }
 
+    // Category modal
+
+    $('.header .modify').click((event) =>{
+
+        event.preventDefault()
+        console.log("Hello there")
+    })
 
 })
