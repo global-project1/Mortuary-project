@@ -9,7 +9,9 @@
         }
 
         private function render(){
+            $this->cat_obj->update_cat();
             $this->get_cats();
+
             require_once $_SESSION['root_dir'] . '/views/dashboard.php';
         }
 
@@ -17,12 +19,10 @@
             $this->get_corpse();
             $this->render();
         }
-        
+
         function get_cats(){
-            if(! isset($_SESSION['categories'])){
-                [$state, $data] =  $this->cat_obj->get_categories();
-                $_SESSION['categories'] = ($state) ? $data : array();
-            }
+            [$state, $data] =  $this->cat_obj->get_categories();
+            $_SESSION['categories'] = ($state) ? $data : array();
         }
 
         function get_corpse($condition = null){
@@ -116,12 +116,19 @@
                 else{
                     $condition = "ORDER BY DOD DESC";
                 }
-            }else{
+            }elseif(isset($_POST['order_by_sex'])){
                 if(isset($_POST['female'])){
                     $condition = "WHERE gender = 'F'";
 
                 }else{
                     $condition = "WHERE gender = 'M'";
+                }
+            }else{
+                if(isset($_POST['Y'])){
+                    $condition = "WHERE marital_status = 'Y'";
+
+                }else{
+                    $condition = "WHERE marital_status = 'N'";
                 }
             }
             $this->get_corpse($condition);

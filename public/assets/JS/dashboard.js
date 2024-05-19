@@ -3,6 +3,7 @@
 $(document).ready(function (){
     const modal = document.querySelector('.modal');
     const aside = document.querySelector('aside')
+    const article = document.querySelector('article')
 
     let corpseInfo = null;
 
@@ -15,8 +16,13 @@ $(document).ready(function (){
         if(event.target.id === "modal"){
           modal.style.transform = "translateX(-100%)"
         }
-        else{
-           aside.style.display = 'none'
+        else {
+            if(event.target.id === 'aside'){
+                aside.style.display = 'none'
+            }
+            else{
+                article.style.display = 'none'
+            }
         }
     })
 
@@ -101,6 +107,7 @@ $(document).ready(function (){
 
 
     function setAside(corpseInfo){
+        article.style.display = 'none'
         aside.style.display = 'flex'
 
         // set values of the aside
@@ -134,9 +141,11 @@ $(document).ready(function (){
     // Category modal
 
     $('.header .modify').click((event) =>{
-
         event.preventDefault()
-        console.log("Hello there")
+
+        aside.style.display = 'none'
+        article.style.display = 'flex'
+        
     })
 
 })

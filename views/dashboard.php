@@ -3,8 +3,12 @@
     $categories = $_SESSION['categories'];
     $corpse = $_SESSION['corpse'] ?? [];
 
+    if(isset($_SESSION['cats'])){
+        extract($_SESSION['cats']);
+    }
+
     $total_corpse = count($_SESSION['all_corpse']);
-    $males = $females = $vip = $vvip = $standard = $young = $adult = 0;
+    $males = $females = $young = $adult = 0;
 
     function age($dob, $dod){
         $yob = (int)explode('-', $dob)[0];
@@ -18,14 +22,6 @@
 
         ($gender === 'M') ? $males++ : $females++;
         (age($DOB, $DOD) <= 18) ? $young++ : $adult++;
-
-        if($cat_name === 'VIP'){
-            $vip++;
-        }elseif($cat_name === 'VVIP'){
-            $vvip++;
-        }else{
-            $standard++;
-        }
     }
 ?>
 
@@ -63,13 +59,6 @@
                 </span>
             </i>
         </button>
-        
-        <a href="" class="modify">
-            <i class="fas fa-pen"></i>
-            <span>
-                Categories
-            </span>
-        </a>
 
         <a href="/logout" class="logout">
             <i class="fas fa-power-off"></i>
@@ -77,7 +66,9 @@
                 Logout
             </span>
         </a>
-        
+
+        <i class="fas fa-circle-info modify" title="display page crews"></i>
+
     </header>
 
     <nav>
@@ -123,9 +114,22 @@
                 </h3>
                 <form action="" method="POST">
                     <input type="hidden" name="option" value="order">
-                    <input type="hidden" name="order_by_sex" value="date">
+                    <input type="hidden" name="order_by_sex" value="gender">
                     <input type="submit" name="female" value="Females">
                     <input type="submit" name="male" value="Males">
+
+                </form>    
+            </div>
+
+            <div>
+                <h3>
+                    Marital Status
+                </h3>
+                <form action="" method="POST">
+                    <input type="hidden" name="option" value="order">
+                    <input type="hidden" name="order_by_married" value="married">
+                    <input type="submit" name="Y" value="Married">
+                    <input type="submit" name="N" value="Not Married">
 
                 </form>    
             </div>
@@ -161,15 +165,15 @@
                 <tr>
                     <th rowspan="3">Category</th>
                     <td>V-VIP</td>
-                    <td><?=$vvip?></td>
+                    <td><?=$vvip ?? NULL?></td>
                 </tr> 
                 <tr>
                     <td>Standard</td>
-                    <td><?=$standard?></td>
+                    <td><?=$standard ?? NULL?></td>
                 </tr> 
                 <tr>
                     <td>VIP</td>
-                    <td> <?=$vip?> </td>
+                    <td> <?=$vip ?? NULL?> </td>
                 </tr>
                 
             </table>
@@ -200,6 +204,7 @@
                 <tr>
                     <th>Image</th>
                     <th>Name</th>
+                    <th>Gender</th>
                     <th>Date of Death</th>
                     <th>Category</th>
                     <th>Action</th>
@@ -214,6 +219,7 @@
                             <img src="assets/images/<?= $cor['picture']?>" alt="">
                         </td>
                         <td> <?= $cor['fname']?> </td>
+                        <td> <?= $cor['gender']?> </td>
                         <td> <?= $cor['DOD']?></td>
                         <td> <?= $cor['cat_name']?></td>
 
@@ -409,6 +415,36 @@
         
     </section>
 
+    <!-- Modification for the category to go in here -->
+
+    <article>
+        <i class="fas fa-x close-btn" id="article" title="close"></i>
+        <h3> All Categories</h3>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Price (frs)</th>
+                <th>Tot. Corpse</th>
+            </tr>
+            
+            <?php
+                foreach($categories as $cat):
+            ?>
+
+            <tr>
+                <td><?=$cat['cat_name']?></td>
+                <td><?=$cat['price']?></td>
+                <td><?=$cat['tot_corpse']?></td>
+                <td class="edit_btn">
+                    <i class="fas fa-pen-to-square" title="edit"></i>
+                </td>
+            </tr>
+            <?php
+                endforeach;    
+            ?>
+        </table>
+        
+    </article>
     <script src="assets/JS/imgPreview.js"></script>
     <script src="assets/JS/dashboard.js"></script>
 

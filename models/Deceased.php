@@ -1,7 +1,7 @@
 <?php
 
     class Deceased extends Base_model{
-        private $conn, $tableName = "Deceased";
+        private $conn, $table_name = "Deceased";
 
         function __construct(){
             $this->conn = require $_SESSION['root_dir'] . '/config/dbconn.php';
@@ -12,7 +12,7 @@
             $key = $this->generate_key();
 
             try{
-                $insert = "INSERT INTO {$this->tableName} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $insert = "INSERT INTO {$this->table_name} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 $stmt = $this->conn->prepare($insert);
                 $array = array($key, $fname, $lname, $occupation, $marital_status, $gender, $DOB, $DOD, $POD, $cause, $deposit_date, $removal_date, $photo, $cat_id, $guardian_name, $guardian_email, $guardian_relation);
@@ -47,7 +47,7 @@
         function read($condition = null){
             try{
                 if ($condition){
-                    $select = "SELECT * FROM $this->tableName AS ds
+                    $select = "SELECT * FROM $this->table_name AS ds
                     INNER JOIN 
                     categories AS ct
                     ON ds.cat_id = ct.cat_id
@@ -55,7 +55,7 @@
                 }
     
                 else{
-                    $select = "SELECT * FROM $this->tableName AS ds
+                    $select = "SELECT * FROM $this->table_name AS ds
                     INNER JOIN 
                     categories AS ct
                     ON ds.cat_id = ct.cat_id";
@@ -87,7 +87,7 @@
             try{
                 $value = $this->conn->escapeString($value);
     
-                $select = "SELECT * FROM {$this->tableName} WHERE id = ?";
+                $select = "SELECT * FROM {$this->table_name} WHERE id = ?";
                 $stmt = $this->conn->prepare($select);
                 $stmt->bindValue(1, $value);
                 $result = $stmt->execute();
@@ -102,9 +102,18 @@
             }
         }
 
+        function read_number($col, $value){
+            try{
+                $query = "SELECT COUNT(*) FROM $this->table_name WHERE $col = ?";
+
+            }catch(SQLite3Exception $e){
+                return false;
+            }
+        }
+
         function update($string, $id){    
             try{
-                $insert = "UPDATE {$this->tableName} SET $string WHERE id = ?";
+                $insert = "UPDATE {$this->table_name} SET $string WHERE id = ?";
 
                 $stmt = $this->conn->prepare($insert);
                 $stmt->bindValue(1, $id);
@@ -112,7 +121,7 @@
                 if(! $stmt->execute()){
                     return [False, $this->conn->lastErrorMsg()];   
                 }
-
+                
                 return [True, "success"];        
             }
             catch(\SQLite3Exception $e){
@@ -136,7 +145,7 @@
                     }
                 }
             }
-            $delete = "DELETE FROM $this->tableName";
+            $delete = "DELETE FROM $this->table_name";
 
             if(! $this->conn->exec($delete)){
                 return false;
@@ -157,7 +166,7 @@
                 }
             }
 
-            $delete = "DELETE FROM $this->tableName WHERE id = ?";
+            $delete = "DELETE FROM $this->table_name WHERE id = ?";
             $stmt = $this->conn->prepare($delete);
 
             $stmt->bindValue(1, $value);

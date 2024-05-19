@@ -66,6 +66,29 @@
       }
     }
 
+    function update($string, $id=null){    
+      try{
+        if($id){
+          $insert = "UPDATE {$this->table_name} SET $string WHERE id = ?";
+          $stmt = $this->conn->prepare($insert);
+          $stmt->bindValue(1, $id);
+
+        }
+        else{
+          $insert = "UPDATE {$this->table_name} SET $string";
+          $stmt = $this->conn->prepare($insert);
+        }
+
+        if(! $stmt->execute()){
+            return [False, $this->conn->lastErrorMsg()];   
+        }
+        
+        return [True, "success"];        
+      }
+      catch(\SQLite3Exception $e){
+        return [False, $e];         
+      }  
+    }
   }
 
 
