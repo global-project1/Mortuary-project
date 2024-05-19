@@ -62,22 +62,23 @@
             }
         }
 
-        function update( $id = null, $col = null, $value = null  ){
+        function update( $string = null, $id = null, $col = null, $value = null  ){
             try{
-                $insert = "UPDATE {$this->table_name} SET $col = ? WHERE week_day = ?";
 
-                $stmt = $this->conn->prepare($insert);
-                $stmt->bindValue(1, $value);
-                $stmt->bindValue(2, $id);
-                
-                // else{
-                //     $insert = "UPDATE {$this->table_name} SET $string WHERE id = '$id'";
-                //     $stmt = $this->conn->prepare($insert);
+                if(!$string){
+                    $insert = "UPDATE {$this->table_name} SET $col = ? WHERE week_day = ?";
+    
+                    $stmt = $this->conn->prepare($insert);
+                    $stmt->bindValue(1, $value);
+                    $stmt->bindValue(2, $id);
+                }
+                else{
+                    $insert = "UPDATE {$this->table_name} SET $string WHERE week_day = ?";
 
-                //     echo $stmt;
-                //     die;
-                // }
-                
+                    $stmt = $this->conn->prepare($insert);
+                    $stmt->bindValue(1, $id);
+                }
+
                 if(! $stmt->execute()){
                     return [False, $this->conn->lastErrorMsg()];   
                 }

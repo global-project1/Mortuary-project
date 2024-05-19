@@ -1,7 +1,7 @@
 <?php
 
     $req = new Request_controller();
-    $req->update_request();
+    $req->get_requests();
     
 
     $categories = $_SESSION['categories'];

@@ -25,8 +25,7 @@
 
         protected function send_mail($email, $title, $message){
             try{
-                $mail = require $_SESSION['root_dir'] . '/models/mailer.php';
-                         
+                $mail = require $_SESSION['root_dir'] . '/models/mailer.php';        
                 $mail->addAddress($email);
                 
                 $mail->Subject = $title;
@@ -35,7 +34,6 @@
                 if(! $mail->send()){
                     return [false, $mail->ErrorInfo];
                 }
-                
                 return [true, "mail sent"];
 
             }catch(Exception $e){
