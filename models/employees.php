@@ -32,18 +32,35 @@
 
             $sql = $query->fetchArray(SQLITE3_ASSOC);   
 
-            if(password_verify($password, $sql['password'])){
+            
+            if($password === $sql['password']){
                 $otp = rand(100000, 999999);
                 $otpExpire = date("Y-m-d H:i:s", strtotime("+30 minute"));
                 $title = "Enter your OTP for login";
                 $message = "Your  OTP is:$otp";
 
-                $this->send_mail($email, $title, $message);
+                $msg = $this->send_mail($email, $title, $message);
 
+                echo $msg[1];
+                
+                die;
                 return [True, 'success'];
             }
 
             return [False, 'login failed'];  
+        }
+
+        function generate_key(){
+            $otplength = 6;
+            $otp = '';
+
+            for ($i = 0; $i < $otplength; $i++){
+                $otp = random_int(0, 9);
+            }
+
+            echo "OTP has been sent.";
+
+            return $otp;
         }
 
     }

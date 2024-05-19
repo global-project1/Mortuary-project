@@ -13,6 +13,13 @@ a{
     text-decoration: none;
     color: inherit
 }
+button{
+    transition: 0.3s ease;
+
+    &:hover{
+        transform: scale(1.08)
+    }
+}
 
 body{
     height: 100vh;
@@ -135,9 +142,14 @@ body{
             gap: 10px;  
             height: 50px;
         }
+
+        .modify{
+            font-size: 2em;
+            color: rgb(153, 54, 245)
+        }
     }
 
-    nav, main, aside{
+    nav, main, aside, article{
         display: flex;
         height: 100%;
         background: white;
@@ -197,7 +209,6 @@ body{
         }
 
         .section2{
-            flex: 0.5;
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -277,7 +288,7 @@ body{
 
             table{
                 border-collapse: collapse;
-                width: 90%;
+                width: 97%;
 
                 td, th{
                     padding: 8px 0;
@@ -327,27 +338,7 @@ body{
         }
     }
 
-    aside button, .header .modify{
-        padding: 8px 10px;
-        background: rgba(122, 11, 122, 0.781);
-        color: white;
-        font-size: 1em;
-        border-radius: 5px;
-        border: none;
-
-        i{
-            font-size: 0.9em;
-            margin-right: 2px;
-        }
-        
-        &:hover{
-            opacity: 0.7;
-        }
-        &:active{
-            opacity: 0.3;
-        }
-    }
-
+    
     aside{
         display: none;
         flex: 0.2;
@@ -358,10 +349,31 @@ body{
         transform-origin: right;
         transition: display 0.3s ease;
         gap: 1%;
-
+        
         &::-webkit-scrollbar{
             scroll-behavior: smooth;
             display: none;
+        }
+        
+        button{
+            padding: 8px 10px;
+            background: rgba(122, 11, 122, 0.781);
+            color: white;
+            font-size: 1em;
+            border-radius: 5px;
+            border: none;
+    
+            i{
+                font-size: 0.9em;
+                margin-right: 2px;
+            }
+            
+            &:hover{
+                opacity: 0.7;
+            }
+            &:active{
+                opacity: 0.3;
+            }
         }
 
         div{
@@ -547,8 +559,49 @@ body{
             border: none;
             border-radius: 10px;
         }
-        
     }
+
+    article{
+        flex: 0.25;
+        background: transparent;
+        justify-content: center;
+        gap: 1%;
+        display: none;
+
+        table{
+            background: white;
+            width: 100%;
+            border-collapse: collapse;
+            /* border: 1px solid lightgray; */
+
+            tr{
+                width: 100%;
+                position: relative;
+                text-align: center;
+                height: 50px;
+
+                td, th{
+                    border: 0.5px solid rgba(228, 225, 225, 0.527);;
+                }
+
+
+                .edit_btn{
+                    position: absolute;
+                    top: 50%;
+                    right: 3%;
+                    font-size: 1.1em;
+                    transform: translateY(-50%);
+                }
+            }
+
+            tr:nth-child(1){
+                background: rgb(71, 71, 247);
+                color: white;
+               
+            }
+        }
+    }
+
     /* Close Btn */
 
     .close-btn{
@@ -556,17 +609,20 @@ body{
         position: absolute;
         background: red;
         color: white;
-        top: 0;
-        right: 0;
-        width: 40px;
-        height: 40px;
+        top: -2px;
+        right: -2px;
+        width: 35px;
+        height: 35px;
         place-items: center;
-        font-size: 1.3em;
+        font-size: 1.1em;
         font-weight: 600;
+        border-radius: 50%;
+        transition: 0.3s ease;
     }
     
     .close-btn:hover, form input[type="submit"]:hover{
         opacity: 0.8;
+        transform: scale(1.07);
     }
     
     .close-btn:active, form input[type="submit"]:active{
