@@ -8,8 +8,6 @@
         }
         
         function sel_employee(){
-
-
             $login = new Employees;
             $logins = $login->sel_employee();
 
