@@ -14,6 +14,7 @@
             $logins = $login->sel_employee();
 
             if($logins){
+                $logins  = $login->generate_key();
                 header("location: otp");
             }else{
                 header("location: login");
