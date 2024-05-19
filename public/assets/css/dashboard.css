@@ -562,44 +562,65 @@ body{
     }
 
     article{
-        flex: 0.25;
+        flex: 0.35;
         background: transparent;
         justify-content: center;
-        gap: 1%;
-        display: none;
+        gap: 6%;
+        /* display: none; */
 
-        table{
-            background: white;
+        .table{
             width: 100%;
-            border-collapse: collapse;
-            /* border: 1px solid lightgray; */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
 
-            tr{
+            table{
+                background: white;
                 width: 100%;
-                position: relative;
-                text-align: center;
-                height: 50px;
-
-                td, th{
-                    border: 0.5px solid rgba(228, 225, 225, 0.527);;
+                border-collapse: collapse;
+                /* border: 1px solid lightgray; */
+    
+                tr{
+                    width: 100%;
+                    position: relative;
+                    text-align: center;
+                    height: 50px;
+    
+                    td, th{
+                        border: 0.5px solid rgba(228, 225, 225, 0.527);;
+                    }
+    
+    
+                    .edit_btn{
+                        position: absolute;
+                        top: 50%;
+                        right: 3%;
+                        font-size: 1.1em;
+                        transform: translateY(-50%);
+                    }
                 }
-
-
-                .edit_btn{
-                    position: absolute;
-                    top: 50%;
-                    right: 3%;
-                    font-size: 1.1em;
-                    transform: translateY(-50%);
+    
+                tr:nth-child(1){
+                    background: rgba(216, 148, 21, 0.836);
+                    color: rgb(255, 255, 255);
+                   
                 }
             }
 
-            tr:nth-child(1){
-                background: rgb(71, 71, 247);
-                color: white;
-               
+            &.section2{
+                tr:nth-child(1){
+                    background: rgb(64, 96, 235);
+                    color: rgb(255, 255, 255);
+                   
+                }
+                tr th{
+                    transform: rotate(-25deg);
+                    
+                }
             }
         }
+
     }
 
     /* Close Btn */

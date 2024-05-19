@@ -14,7 +14,7 @@
     
                 $results = $this->conn->exec($sql);
                 return true;    
-
+                
             }catch(SQLite3Exception $e){
                 return false;
             }

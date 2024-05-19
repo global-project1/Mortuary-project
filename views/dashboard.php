@@ -1,5 +1,9 @@
 <?php
 
+    $req = new Request_controller();
+    $req->update_request();
+    
+
     $categories = $_SESSION['categories'];
     $corpse = $_SESSION['corpse'] ?? [];
 
@@ -283,8 +287,7 @@
     </aside>
 
     <section class="modal">
-        <div class="form-section">
-            
+        <div class="form-section">     
             <i class="fas fa-x close-btn" id="modal" title="close"></i>
 
             <form action="" method="POST" enctype="multipart/form-data">
@@ -409,7 +412,7 @@
                 </div>
 
                 <input type="submit" name="add_corpse" value="Add" id="submit">
-                
+
             </form>
         </div>
         
@@ -419,30 +422,67 @@
 
     <article>
         <i class="fas fa-x close-btn" id="article" title="close"></i>
-        <h3> All Categories</h3>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Price (frs)</th>
-                <th>Tot. Corpse</th>
-            </tr>
-            
-            <?php
-                foreach($categories as $cat):
-            ?>
 
-            <tr>
-                <td><?=$cat['cat_name']?></td>
-                <td><?=$cat['price']?></td>
-                <td><?=$cat['tot_corpse']?></td>
-                <td class="edit_btn">
-                    <i class="fas fa-pen-to-square" title="edit"></i>
-                </td>
-            </tr>
-            <?php
-                endforeach;    
-            ?>
-        </table>
+        <div class="table section1">
+            <h3> All Categories</h3>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Price (frs)</th>
+                    <th>Tot. Corpse</th>
+                </tr>
+                <?php
+                    foreach($categories as $cat):
+                ?>
+                <tr>
+                    <td><?=$cat['cat_name']?></td>
+                    <td><?=$cat['price']?></td>
+                    <td><?=$cat['tot_corpse']?></td>
+                    <td class="edit_btn">
+                        <i class="fas fa-pen-to-square" title="edit"></i>
+                    </td>
+                </tr>
+                <?php
+                    endforeach;    
+                ?>
+            </table>
+        </div>
+
+        <div class="table section2">
+            <h3>Removal Schedules</h3>
+            <table>
+                <tr>
+                    <th>Time</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thurs</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </tr>
+                
+                <?php
+                    // $days = ['8:00-9:30 AM', '9:30-11:00 AM', '11:00-12:30 PM', '12:30-2:00 PM', '2:00-3:30 PM', '3:30-5:00 PM'];
+
+                    $days = ['6:00-6:05 AM', '6:05-6:10 AM', '6:10-6:15 AM', '6:15-6:20 AM', '6:20-6:25 AM', '6:25-6:30 AM'];
+                    for($i = 0; $i < 6; $i++):
+                ?>
+    
+                <tr>
+                    <td><?=$days[$i]?></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <?php 
+                    endfor; 
+                ?>
+            </table>
+        </div>
+
         
     </article>
     <script src="assets/JS/imgPreview.js"></script>
