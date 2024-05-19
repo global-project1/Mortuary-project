@@ -31,6 +31,7 @@
         function update_request($array, $col, $key){
             $array = json_encode($array);
 
+
             $string = $col. " = '$array'";
             $this->req_obj->update($string, $key);
                 

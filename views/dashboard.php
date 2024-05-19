@@ -1,5 +1,16 @@
 <?php
 
+    // $req_controller = new Request_controller();
+
+    // $new_dt = array(
+    //     "date_of_activation" => date("Y-m-d H:i:s"),
+    //     "duration" => "11:00:00-12:30:00",
+    //     "expiry_date" => date("Y-m-d H:i:s", strtotime(" +120 minute")),
+    //     "status" => true
+    // );
+
+    // $req_controller->update_request($new_dt, "slot3", "Wednesday");
+
     $requests = $_SESSION['requests'];
     $categories = $_SESSION['categories'];
     $corpse = $_SESSION['corpse'] ?? [];
@@ -449,13 +460,14 @@
             <h3>Removal Schedules</h3>
             <table>
                 <tr>
-                    <th>Time</th>
-                    <th>Mon</th>
-                    <th>Tue</th>
-                    <th>Wed</th>
-                    <th>Thurs</th>
-                    <th>Fri</th>
-                    <th>Sat</th>
+                    <th>Days</th>
+                    <th>8h-9h:30</th>
+                    <th>9h:30-11h</th>
+                    <th>11h-12h:30</th>
+                    <th>12h:30-14h</th>
+                    <th>14h-15h:30</th>
+                    <th>15h:30-17h</th>
+                    
                 </tr>
                 
                 <?php foreach($requests as $day): ?>
@@ -464,11 +476,15 @@
                     <?php foreach($day as $name => $slot): ?>
                         <td><?=$name?></td>
 
-                        <?php foreach($slot as $data):?>
-
-                            <td>checked</td>
-
-                         <?php endforeach; ?>
+                        <?php foreach($slot as $data): 
+                            
+                            if($data->status){
+                                echo "<td> <i class='fas fa-square-check'></i></td>";
+                            }
+                            else{
+                                echo "<td></td>";
+                            }
+                          endforeach; ?>
                     <?php endforeach; ?>
                 </tr>
                 <?php 

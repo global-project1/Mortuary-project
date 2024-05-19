@@ -562,7 +562,7 @@ body{
     }
 
     article{
-        flex: 0.6;
+        flex: 0.3;
         background: transparent;
         justify-content: center;
         gap: 6%;
@@ -588,10 +588,8 @@ body{
                     height: 50px;
     
                     td, th{
-                        border: 0.5px solid rgba(228, 225, 225, 0.527);;
-                        padding: 2px
+                        border: 0.5px solid rgba(228, 225, 225, 0.527);                    
                     }
-    
     
                     .edit_btn{
                         position: absolute;
@@ -604,8 +602,7 @@ body{
     
                 tr:nth-child(1){
                     background: rgba(216, 148, 21, 0.836);
-                    color: rgb(255, 255, 255);
-                   
+                    color: rgb(255, 255, 255);     
                 }
             }
 
@@ -613,15 +610,35 @@ body{
                 tr:nth-child(1){
                     background: rgb(64, 96, 235);
                     color: rgb(255, 255, 255);
-                   
                 }
+
+                td, th{
+                    border: 0.5px solid rgba(184, 182, 182, 0.699);
+                    width: 50px;
+                }
+
                 tr th{
-                    transform: rotate(-25deg);
-                    
+                    /* font-size: 0.9em; */
+                    font-weight: 400;
+                    padding: 2%;
+                    transform: rotate(-35deg);
                 }
+
+                td:nth-child(1){
+                    background:rgb(42, 179, 126);
+                    color: white;
+                    font-weight: 500;
+
+                }
+
+                td i{
+                    color: purple;
+                    font-size: 1.1em;
+                }
+
+
             }
         }
-
     }
 
     /* Close Btn */
@@ -650,5 +667,4 @@ body{
     .close-btn:active, form input[type="submit"]:active{
         opacity: 0.5
     }   
-
 }
