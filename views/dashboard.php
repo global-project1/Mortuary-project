@@ -1,9 +1,6 @@
 <?php
 
-    $req = new Request_controller();
-    $req->get_requests();
-    
-
+    $requests = $_SESSION['requests'];
     $categories = $_SESSION['categories'];
     $corpse = $_SESSION['corpse'] ?? [];
 
@@ -461,24 +458,21 @@
                     <th>Sat</th>
                 </tr>
                 
-                <?php
-                    // $days = ['8:00-9:30 AM', '9:30-11:00 AM', '11:00-12:30 PM', '12:30-2:00 PM', '2:00-3:30 PM', '3:30-5:00 PM'];
-
-                    $days = ['6:00-6:05 AM', '6:05-6:10 AM', '6:10-6:15 AM', '6:15-6:20 AM', '6:20-6:25 AM', '6:25-6:30 AM'];
-                    for($i = 0; $i < 6; $i++):
-                ?>
+                <?php foreach($requests as $day): ?>
     
                 <tr>
-                    <td><?=$days[$i]?></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <?php foreach($day as $name => $slot): ?>
+                        <td><?=$name?></td>
+
+                        <?php foreach($slot as $data):?>
+
+                            <td>checked</td>
+
+                         <?php endforeach; ?>
+                    <?php endforeach; ?>
                 </tr>
                 <?php 
-                    endfor; 
+                    endforeach; 
                 ?>
             </table>
         </div>

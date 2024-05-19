@@ -562,7 +562,7 @@ body{
     }
 
     article{
-        flex: 0.35;
+        flex: 0.6;
         background: transparent;
         justify-content: center;
         gap: 6%;
@@ -589,6 +589,7 @@ body{
     
                     td, th{
                         border: 0.5px solid rgba(228, 225, 225, 0.527);;
+                        padding: 2px
                     }
     
     

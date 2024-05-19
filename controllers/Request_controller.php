@@ -14,15 +14,18 @@
         function get_requests($cond = null){
             [$status, $data] = $this->req_obj->read($cond);
 
-            echo '<pre>';
+            $_SESSION['requests'] = [];
+            
             foreach($data as $dt){
+                $new_data = array();
                 foreach($dt as $d => $value){
-                    echo $d . '<br>';
-                }
-                die;
-            }
 
-            die;
+                    if($d != 'week_day'){
+                        array_push($new_data, json_decode($value));
+                    }
+                }
+                array_push($_SESSION['requests'], array($dt['week_day'] =>$new_data));
+            }
         }
 
         function update_request($array, $col, $key){

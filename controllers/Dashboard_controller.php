@@ -1,16 +1,18 @@
 <?php
 
     class Dashboard_controller{
-        private $cat_obj, $dsc_obj;
+        private $cat_obj, $dsc_obj, $req_obj;
 
         function __construct(){
             $this->cat_obj = new Category_Controller();
             $this->dsc_obj = new Deceased_controller();
+            $this->req_obj = new Request_controller();
         }
 
         private function render(){
             $this->cat_obj->update_cat();
             $this->get_cats();
+            $this->req_obj->get_requests();
 
             require_once $_SESSION['root_dir'] . '/views/dashboard.php';
         }
