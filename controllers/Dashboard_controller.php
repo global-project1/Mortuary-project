@@ -34,6 +34,8 @@
             switch($_POST['option']){
                 case 'add':
                     $this->add();
+                    echo '<pre>';
+                    print_r($_POST);
                     break;
 
                 case 'edit':

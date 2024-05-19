@@ -30,7 +30,7 @@
     switch (true){
         case in_array($route, ['login', 'signin']):
             if($request_method == 'POST'){
-                $base->signIn();
+                $base->signIn(); 
             }
             else{
                 $base->home($page = "login");

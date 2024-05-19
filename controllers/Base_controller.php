@@ -13,8 +13,11 @@
         }
 
         function signIn(){
+            
             $userObj = new Emp_controller();
+            $signin = $userObj->sel_employee();
 
+            return $signin;
         }
 
         function signUp(){
