@@ -23,14 +23,20 @@
         }
 
         function otp(){
-            $userObj = new Emp_controller();
-            $otp = $userObj->sel_employee();
+            if(isset($_SESSION['corpse_remover'])){
+                extract($_SESSION['corpse_remover']);
 
-            if($otp){
-               header("Location: /dashboard");
             }
             else{
-                header("Location: /login");
+                $userObj = new Emp_controller();
+                $otp = $userObj->sel_employee();
+    
+                if($otp){
+                   header("Location: /dashboard");
+                }
+                else{
+                    header("Location: /login");
+                }
             }
         }
 
@@ -44,7 +50,6 @@
                 header("location: /corpseScheduling");
             }
         }
-
 
         function logout(){
             session_destroy();

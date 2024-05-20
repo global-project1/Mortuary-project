@@ -10,7 +10,8 @@
         function add_employee(){
             try{
                 $sql = "INSERT INTO {$this->table_name}(employee_id, email, password, name)
-                VALUES('01PRO2015', 'afegenuim@gmail.com', 'school@.com1', 'Milos Gs')";
+                VALUES('01PRO2015', 'afegenuim@gmail.com', 'school@.com1', 'Milos Gs'),
+                ('02PRO2015', '')";
     
                 $results = $this->conn->exec($sql);
                 return true;    

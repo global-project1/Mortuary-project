@@ -12,8 +12,17 @@
 
 </head>
 <body>
-    <h1>Corpse removal</h1>
+    
     <form method="post">
+        <h1>Corpse removal Scheduling</h1>
+
+        <?php
+            if(isset($_SESSION['req_error'])){
+                echo "<p class='error_msg'> {$_SESSION['req_error']}</p>";
+                unset($_SESSION['req_error']);
+            }
+        ?>
+
         <input type="text" placeholder="name" required name="name">
         <input type="text" placeholder="email" required name="email">
         <input type="date" placeholder="Date of removal" required name="DOR">

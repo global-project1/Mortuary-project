@@ -59,7 +59,7 @@
             }
             break;
             
-        case in_array($route, ['corpseScheduling']):
+        case in_array($route, ['corpseScheduling', 'corpse']):
             if($request_method == 'POST'){
                 $base->schedule();
             }else{
