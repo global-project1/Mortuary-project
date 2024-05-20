@@ -7,18 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    
-      
-
-                      <div id="div2"><h1>WELCOME TO HEAVENS</h1>
+                     <div id="div2"><h1>WELCOME TO HEAVENS</h1>
                             <P><i> where your souls rest in peace</i></P>
                       </div>
                                 <img src="assets/images/cross3.png" id="img" ><br>
                                 <input type="button" value="signin">
-                            
-                        
-                            
-    
-    
+                                <input type="button" value="request">
 </body>
 </html>
