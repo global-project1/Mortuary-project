@@ -23,6 +23,7 @@
         ($gender === 'M') ? $males++ : $females++;
         (age($DOB, $DOD) <= 18) ? $young++ : $adult++;
     }
+
 ?>
 
 <!DOCTYPE html>

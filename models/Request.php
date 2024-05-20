@@ -16,26 +16,18 @@
                 if ($condition){
                     $select = "SELECT * FROM $this->table_name $condition";
                 }
-    
                 else{
                     $select = "SELECT * FROM $this->table_name";
                 }
-
                 $result = $this->conn->query($select);
                 if(! $result){
                     return [false, "No such record found"];
                 }
-
                 $results = array();
 
                 while($row = $result->fetchArray(SQLITE3_ASSOC)){
                     array_push($results, $row);
                 }
-                // Set the global variable
-                if(! $condition){
-                    $_SESSION['all_corpse'] = $results;
-                }
-
                 return [true, $results];
             }
             catch(Exception $e){

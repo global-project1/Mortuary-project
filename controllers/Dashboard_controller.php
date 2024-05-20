@@ -35,8 +35,6 @@
             switch($_POST['option']){
                 case 'add':
                     $this->add();
-                    echo '<pre>';
-                    print_r($_POST);
                     break;
 
                 case 'edit':
@@ -73,7 +71,6 @@
         }
 
         private function edit_cat(){
-
             $update_string = $this->check_updated_info($_SESSION['categories']);
 
             if(! $update_string){
@@ -81,26 +78,32 @@
                     'status' => false,
                     'msg' => "There is nothing to update"
                 );
-                $this->render();
             }
             else{
                 $this->cat_obj->update_cat($update_string, $_POST['id']);
-                
-                $this->index();
             }
+            $this->render();
         }
 
         private function check_updated_info($array){
             // check if any info has been updated
             $existing_data = array();
             $id = $_POST['id'];
-
             foreach($array as $item){
-                if (in_array($id , [$item['id'], $item['cat_id']])){
-                    $existing_data = $item;
+                if(isset($item['id'])){
+
+                    if($id == $item['id']){
+                        $existing_data = $item;
+                    }
+                }else {
+                    if(isset($item['cat_id'])){
+                        if($id == $item['cat_id']){
+                            $existing_data = $item;
+                        }
+                    }
                 }
             }
-
+            
             $update_string = "";
             
             foreach($_POST as $key => $value){
@@ -119,19 +122,21 @@
             
             $photo = $this->dsc_obj->set_picture();
 
-            if(! $update_string){
+            if(! $update_string && ! $photo){
                 $_SESSION['dash_msg'] = array( 
                     'status' => false,
                     'msg' => "There is nothing to update"
                 );
+                $this->render();
             }
             else{
                 if($photo){
                     $update_string .= ' picture = \'' .$photo .'\'';
                 }
                 $this->dsc_obj->update_corpse($update_string, $_POST['id']);   
+                
+                $this->index();
             }
-            $this->render();
         }
 
         private function order(){
