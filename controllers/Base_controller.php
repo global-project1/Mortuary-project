@@ -39,7 +39,7 @@
             $schedule = $schObj->corpse();
 
             if($schedule){
-                header("location: /dashboard");
+                header("location: /otp");
             }else{
                 header("location: /corpseScheduling");
             }
