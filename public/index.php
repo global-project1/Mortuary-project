@@ -59,9 +59,18 @@
             }
             break;
             
+        case in_array($route, ['corpseScheduling']):
+            if($request_method == 'POST'){
+                $base->schedule();
+            }else{
+                $base->home($page = "corpseScheduling");
+            }
+            break;
+
         default:
             $base->home($page = "index");
             break;
+
 
     }   
 

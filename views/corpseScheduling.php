@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Corpse Scheduling</title>
 
     <link rel="stylesheet" href="assets/css/dashboard.css">
     <!-- link to font icons -->
@@ -15,8 +15,9 @@
     <h1>Corpse removal</h1>
     <form method="post">
         <input type="text" placeholder="name" required name="name">
-        <input type="text" placeholder="contact" required name="tel">
+        <input type="text" placeholder="email" required name="email">
         <input type="date" placeholder="Date of removal" required name="DOR">
+        <input type="text" placeholder="Enter Corpse ID" required name="corpseId">
         <input type="submit" value="submit" name="scheduling">
     </form>
 </body>

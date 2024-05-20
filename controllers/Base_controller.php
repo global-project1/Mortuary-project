@@ -34,6 +34,17 @@
             }
         }
 
+        function schedule(){
+            $schObj = new Cscheduling_controller();
+            $schedule = $schObj->corpse();
+
+            if($schedule){
+                header("location: /dashboard");
+            }else{
+                header("location: /corpseScheduling");
+            }
+        }
+
 
         function logout(){
             session_destroy();
