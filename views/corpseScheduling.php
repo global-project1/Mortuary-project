@@ -12,8 +12,9 @@
 
 </head>
 <body>
-    <h1>Corpse removal</h1>
+    
     <form method="post">
+        <h1>Corpse removal Scheduling</h1>
         <input type="text" placeholder="name" required name="name">
         <input type="text" placeholder="email" required name="email">
         <input type="date" placeholder="Date of removal" required name="DOR">

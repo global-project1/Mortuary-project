@@ -32,6 +32,16 @@ form h1{
     margin-top: 20px;
 }
 
+form{
+    width: 25%;
+    border: 1px solid black;
+    background: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+    position: relative;
+}
+
 form input{
     width: 90%;
     padding: 15px;
@@ -39,21 +49,6 @@ form input{
     border: none;
     border-bottom: 1px solid black;
 
-}
-
-form label{
-    position: absolute;
-    color: blueviolet;
-    top: 20%;
-    left: 85%;
-}
-
-form .label3{
-    top: 40%;
-}
-
-form .label4{
-    top: 55%;
 }
 
 form input[type="submit"]{

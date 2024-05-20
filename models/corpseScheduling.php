@@ -33,7 +33,7 @@
                     return [false, $msg[1]];
                 }
 
-                $sql = "UPDATE employees SET otp = $otp WHERE id = '$corpse'";
+                $sql = "UPDATE deceased SET otp = $otp WHERE id = '$corpse'";
                 $result = $this->conn->exec($sql);
 
                 if($result){
