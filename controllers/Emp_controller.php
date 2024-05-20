@@ -1,5 +1,4 @@
 <?php
-
     class Emp_controller{
         private $emp_obj, $login;
 
@@ -10,13 +9,25 @@
         function sel_employee(){
             $login = new Employees;
             $logins = $login->sel_employee();
+            
+            if($logins){         
+               return true;
+
+            }else{
+                return false;
+            }
+            die;
+        }
+
+        function updateEmployees(){
+            $login = new Employees;
+            $logins = $login->sel_employee();
 
             if($logins){
-                $logins  = $login->generate_key();
-                header("location: otp");
+                header("location: dashboard");
             }else{
-                header("location: login");
+                header("location: otp");
             }
-        }
+        }    
     }
 ?>

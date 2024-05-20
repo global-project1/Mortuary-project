@@ -23,6 +23,30 @@
         function sel_employee(){
             extract($_POST);
 
+            if(isset($_POST['otp'])){
+                $email = $_SESSION['email'];
+
+                $sql = "SELECT * FROM employees WHERE email = ? AND otp = ?";
+
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindValue(1, $email);
+                $stmt->bindValue(2, $otp);
+                $result = $stmt->execute();
+
+                if($result){
+                    $result = $result->fetchArray(SQLITE3_ASSOC);  
+                   if($result){
+                        return true;
+                   }
+
+                    return false;
+                }
+                else{
+                    false;
+                }
+
+            }
+
             $sql = "SELECT * FROM employees WHERE email = '$email'";
             $query = $this->conn->query($sql);
 
@@ -30,9 +54,8 @@
                 return [False, $this->conn->errno];  
             }
 
-            $sql = $query->fetchArray(SQLITE3_ASSOC);   
+            $sql = $query->fetchArray(SQLITE3_ASSOC);  
 
-            
             if($password === $sql['password']){
                 $otp = rand(100000, 999999);
                 $otpExpire = date("Y-m-d H:i:s", strtotime("+30 minute"));
@@ -41,26 +64,22 @@
 
                 $msg = $this->send_mail($email, $title, $message);
 
-                echo $msg[1];
+                if(! $msg[0]){ 
+                    return [false, $msg[1]];
+                }
+
+                $sql = "UPDATE employees SET otp = $otp WHERE email = '$email'";
+                $result = $this->conn->exec($sql);
                 
-                die;
-                return [True, 'success'];
+                if($result){
+                    $_SESSION['email'] = $email;
+                    return [true, "otp successfully saved"];
+                }
+                return [false, 'mail sent but otp did not save'];
+
             }
 
             return [False, 'login failed'];  
-        }
-
-        function generate_key(){
-            $otplength = 6;
-            $otp = '';
-
-            for ($i = 0; $i < $otplength; $i++){
-                $otp = random_int(0, 9);
-            }
-
-            echo "OTP has been sent.";
-
-            return $otp;
         }
 
     }

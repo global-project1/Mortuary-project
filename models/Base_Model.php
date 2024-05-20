@@ -27,14 +27,13 @@
             try{
                 $mail = require $_SESSION['root_dir'] . '/models/mailer.php';        
                 $mail->addAddress($email);
-                
                 $mail->Subject = $title;
                 $mail->Body = $message;
                
                 if(! $mail->send()){
                     return [false, $mail->ErrorInfo];
                 }
-                return [true, "mail sent"];
+                return [true, 'mail sent'];
 
             }catch(Exception $e){
                return [false, $e->getMessage()];

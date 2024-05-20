@@ -52,7 +52,11 @@
             break;
 
         case in_array($route, ['otp']):
-            $base->home($page = "otp");
+            if($request_method == 'POST'){
+                $base->otp();
+            }else{
+                $base->home($page = "otp");
+            }
             break;
             
         default:

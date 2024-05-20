@@ -12,17 +12,28 @@
             $this->render();
         }
 
-        function signIn(){
-            
+        function signIn(){            
             $userObj = new Emp_controller();
             $signin = $userObj->sel_employee();
 
-            return $signin;
+            if(! $signin){
+                $this->home("login");
+            }
+           header("Location: /otp");
         }
 
-        function signUp(){
-            
+        function otp(){
+            $userObj = new Emp_controller();
+            $otp = $userObj->sel_employee();
+
+            if($otp){
+               header("Location: /dashboard");
+            }
+            else{
+                header("Location: /login");
+            }
         }
+
 
         function logout(){
             session_destroy();
