@@ -2,10 +2,13 @@
 
 $(document).ready(function (){
     const modal = document.querySelector('.modal');
+    const catModal = document.querySelector('.cat_modal')
     const aside = document.querySelector('aside')
     const article = document.querySelector('article')
 
     let corpseInfo = null;
+    let server_url = null;
+    let catInfo = null;
 
     $('.addFile').click( ()=>{
         $('.form-section #file').attr('required', false)
@@ -21,7 +24,12 @@ $(document).ready(function (){
                 aside.style.display = 'none'
             }
             else{
-                article.style.display = 'none'
+                if(event.target.id === 'article'){
+                    article.style.display = 'none'
+                }
+                else{
+                    catModal.style.transform = "translateX(100%)"
+                }
             }
         }
     })
@@ -37,31 +45,31 @@ $(document).ready(function (){
     
     function setModal(){
         // Change the option of the form
-        $('.form-section form #hidden').val('edit')
+        $('.modal .form-section form #hidden').val('edit')
 
         // Set the other values
         for(let key in corpseInfo){
             switch(key){
                 case "picture":{
-                    let img = $(`.form-section form #${key}`)
+                    let img = $(`.modal .form-section form #${key}`)
                     img.css('display', 'block')
                     img.attr('src', `assets/images/${corpseInfo[key]}`)
                     break;
                 }
                 case "cat_name":{
-                    $(`form #corpse_cat option[value="${corpseInfo['cat_id']}"]`).attr('selected', true)
+                    $(`.modal form #corpse_cat option[value="${corpseInfo['cat_id']}"]`).attr('selected', true)
                     break;
                 }
                 case "gender":{
-                    $(`form input[name=${key}][value="${corpseInfo[key]}"]`).attr('checked', true)
+                    $(`.modal form input[name=${key}][value="${corpseInfo[key]}"]`).attr('checked', true)
                     break;
                 }
                 case "marital_status":{
-                    $(`form input[name="${key}"][value="${corpseInfo[key]}"]`).attr('checked', true)
+                    $(`.modal form input[name="${key}"][value="${corpseInfo[key]}"]`).attr('checked', true)
                     break;
                 }
                 default:{
-                    $(`.form-section form #${key}`).val(corpseInfo[key])
+                    $(`.modal .form-section form #${key}`).val(corpseInfo[key])
                     break;
                 }
             }
@@ -72,30 +80,31 @@ $(document).ready(function (){
         idInput.setAttribute('name', 'id')
         idInput.setAttribute('value', corpseInfo['id'])
 
-        $('.form-section form').append(idInput)
+        $('.modal .form-section form').append(idInput)
 
         // Change the value of the submit button
-        $('.form-section form input[type="submit"]').val('Edit')
-
+        $('.modal .form-section form input[type="submit"]').val('Edit')
     }
 
     $('input[name="view"]').click(async (event) =>{
+
+        server_url = "assets/data/corpse_info.php";
         event.preventDefault();
         let hidden = event.target;
         let id = hidden.dataset.corid;
 
-        await getInfo(id)
+        corpseInfo = await getInfo(server_url, id)
 
         if(corpseInfo != null){
             setAside(corpseInfo)
         }
     })
 
-    async function getInfo(id){
+    async function getInfo(server, id){
         try {
-            const resp = await $.get("assets/data/corpse_info.php", { id });
+            const resp = await $.get(server, { id });
             if (resp) {
-                corpseInfo = JSON.parse(resp)    
+                return JSON.parse(resp)    
             }
             else{
                 console.log("fetch data error")
@@ -104,7 +113,6 @@ $(document).ready(function (){
             console.error("Error fetching data: ", error)
         }
     }
-
 
     function setAside(corpseInfo){
         article.style.display = 'none'
@@ -148,4 +156,33 @@ $(document).ready(function (){
         
     })
 
+    $('article .edit_btn').click(async (event)=>{
+
+        server_url = "assets/data/category_info.php";
+        let hidden = event.target;
+
+        console.log(hidden.dataset)
+        let id = hidden.dataset.catid;
+
+        catInfo = await getInfo(server_url, id)
+
+        if(catInfo != null){
+            setCatModal()
+        }
+    })
+    
+    function setCatModal(){
+        catModal.style.transform = 'translatex(0)';
+        
+        for(let key in catInfo){
+            $(`.cat_modal form #${key}`).val(catInfo[key])
+        }
+
+        let idInput = document.createElement('input')
+        idInput.setAttribute('type', 'hidden')
+        idInput.setAttribute('name', 'id')
+        idInput.setAttribute('value', catInfo['cat_id'])
+
+        $('.cat_modal .form-section form').append(idInput)
+    }
 })

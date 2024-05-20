@@ -218,7 +218,7 @@ body{
             table{
                 border-collapse: collapse;
                 width: 100%;
-                background: rgba(70, 26, 90, 0.795);
+                background: rgb(155, 89, 231);
                 color: aliceblue;
 
                 td, th{
@@ -357,7 +357,7 @@ body{
         
         button{
             padding: 8px 10px;
-            background: rgba(122, 11, 122, 0.781);
+            background: rgba(167, 19, 167, 0.781);
             color: white;
             font-size: 1em;
             border-radius: 5px;
@@ -561,6 +561,89 @@ body{
         }
     }
 
+    .cat_modal{
+        height: 100vh;
+        width: 50vw;
+        position: fixed;
+        background:rgba(65, 64, 64, 0.486);
+        top: 0;
+        right: 0;
+        display: grid;
+        place-items: center;
+        transform-origin: right;
+        transform: translateX(-100%);
+        transition: transform 0.5s;
+        z-index: 1;
+        transform: translateX(100%);
+
+        .form-section{
+            display: grid;
+            place-items: center;
+            position: relative;
+            background: rgb(249, 252, 255);
+            overflow: hidden;
+
+            .close-btn{
+                border-radius: unset;
+                background: rgba(168, 15, 54, 0.747)
+            }
+
+            form{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                padding: 20px 30px;
+                gap: 20px;
+
+                .input-sect{
+                    width: 100%;
+                    border: none;
+                    background: transparent;
+
+                    input{
+                        width: 100%;
+                        height: 35px;
+                        outline: none;
+                        background: transparent;
+                        padding: 2%;
+                        border: 1px solid lightgrey;
+                        cursor: pointer;
+                        border-radius: 7px;
+
+                    }
+                    label{
+                        letter-spacing: 0.0;
+                        color: rgb(71, 69, 69);
+                    }
+                }
+
+                input[type="submit"]{
+                    /* height: 35px; */
+                    padding: 5% 8%;
+                    font-size: 1em;
+                    font-weight: 500;
+                    border: none;
+                    transition: 0.3s;
+                    color: aliceblue;
+                    border-radius: 7px;
+                    background: rgb(155, 89, 231);
+                    transition: background 0.4s;
+                }
+                
+                input[type="submit"]:hover{
+                    background: linear-gradient(120deg, rgb(80, 158, 247), rgb(155, 89, 231))
+                }     
+            }
+        }   
+
+        .input-part2{
+            display: grid;
+            place-items: center;
+            grid-template-columns: 1fr;
+        }
+    }
+
     article{
         flex: 0.3;
         background: transparent;
@@ -633,7 +716,7 @@ body{
 
                 td i{
                     color: purple;
-                    font-size: 1.1em;
+                    font-size: 1.5em;
                 }
 
 

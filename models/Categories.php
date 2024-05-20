@@ -69,7 +69,9 @@
     function update($string, $id=null){    
       try{
         if($id){
-          $insert = "UPDATE {$this->table_name} SET $string WHERE id = ?";
+
+          $insert = "UPDATE {$this->table_name} SET $string WHERE cat_id = ?";
+
           $stmt = $this->conn->prepare($insert);
           $stmt->bindValue(1, $id);
 

@@ -18,7 +18,6 @@
         }
 
         function update_cat($string = null, $id = null){
-
             if(!$string && !$id){
                 $vip = $vvip = $standard = 0;
                 foreach($_SESSION['all_corpse'] as $corp){
@@ -43,6 +42,18 @@
 
                 $string = "tot_corpse = $standard WHERE cat_name = 'Standard'";
                 $this->cat_obj->update($string = $string);
+            }
+
+            else{
+                [$state, $msg] = $this->cat_obj->update($string, $id);
+                if(! $state){
+                    $_SESSION['dash_msg'] = array( 
+                        'status' => false,
+                        'msg' => "An error occured while updating the corpse information"
+                    );
+                }else{
+                    $_SESSION['dash_msg'] = ['status' =>true, 'msg' => 'category updated successfully'];
+                }
             }
         }
     }

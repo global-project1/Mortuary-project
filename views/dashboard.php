@@ -1,16 +1,5 @@
 <?php
 
-    // $req_controller = new Request_controller();
-
-    // $new_dt = array(
-    //     "date_of_activation" => date("Y-m-d H:i:s"),
-    //     "duration" => "11:00:00-12:30:00",
-    //     "expiry_date" => date("Y-m-d H:i:s", strtotime(" +120 minute")),
-    //     "status" => true
-    // );
-
-    // $req_controller->update_request($new_dt, "slot3", "Wednesday");
-
     $requests = $_SESSION['requests'];
     $categories = $_SESSION['categories'];
     $corpse = $_SESSION['corpse'] ?? [];
@@ -25,7 +14,6 @@
     function age($dob, $dod){
         $yob = (int)explode('-', $dob)[0];
         $yod = (int)explode('-', $dod)[0];
-
         return $yod-$yob;
     }
 
@@ -426,6 +414,34 @@
         
     </section>
 
+    <!-- Modal for the category -->
+    
+    <section class="cat_modal">
+        <div class="form-section">     
+            <i class="fas fa-x close-btn" id="cat_modal" title="close"></i>
+
+            <form action="" method="POST" enctype="multipart/form-data">
+                <h3>Edit <span id="cat_name">Category</span></h3>
+
+                <input type="hidden" id="hidden" name="option" value="edit_category">
+
+                <div class="input-sect">
+                    <label for="cat_name">Name</label>
+                    <input type="text" name="cat_name" id="cat_name" required>
+                </div>
+
+                <div class="input-sect">
+                    <label for="price">Price</label>
+                    <input type="number" name="price" id="price" required>
+                </div>
+
+                <input type="submit" name="edit_cat" value="Modify" id="submit">
+
+            </form>
+        </div>
+        
+    </section>
+
     <!-- Modification for the category to go in here -->
 
     <article>
@@ -446,8 +462,8 @@
                     <td><?=$cat['cat_name']?></td>
                     <td><?=$cat['price']?></td>
                     <td><?=$cat['tot_corpse']?></td>
-                    <td class="edit_btn">
-                        <i class="fas fa-pen-to-square" title="edit"></i>
+                    <td>
+                        <i class="fas fa-pen-to-square edit_btn" title="edit" data-catID="<?=$cat['cat_id']?>"></i>
                     </td>
                 </tr>
                 <?php
@@ -466,8 +482,7 @@
                     <th>11h-12h:30</th>
                     <th>12h:30-14h</th>
                     <th>14h-15h:30</th>
-                    <th>15h:30-17h</th>
-                    
+                    <th>15h:30-17h</th>            
                 </tr>
                 
                 <?php foreach($requests as $day): ?>
@@ -476,8 +491,7 @@
                     <?php foreach($day as $name => $slot): ?>
                         <td><?=$name?></td>
 
-                        <?php foreach($slot as $data): 
-                            
+                        <?php foreach($slot as $data):                   
                             if($data->status){
                                 echo "<td> <i class='fas fa-square-check'></i></td>";
                             }
