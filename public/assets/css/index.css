@@ -1,0 +1,39 @@
+body{
+    background: url(../images/l22a2.jpg) no-repeat;
+    background-size: cover;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+}
+#div2{
+    
+    justify-content: center;
+    text-align: center;
+    
+}
+h1{
+    font-size: 75px;
+    color: white;
+}
+p{
+    font-size: 20px;
+    color: gold;
+}
+a{
+    border-radius: 20% ;
+    border: 5px solid grey;
+    width: 100px;
+    height: 50px;
+    background-color: grey;
+    margin-top:  10%;
+}
+a:hover{
+    color: gold;
+
+}
+img{
+    position: relative;
+       top: 20%;
+}
