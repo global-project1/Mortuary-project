@@ -64,25 +64,20 @@
 
         function update( $string = null, $id = null, $col = null, $value = null  ){
             try{
-
                 if(!$string){
                     $insert = "UPDATE {$this->table_name} SET $col = ? WHERE week_day = ?";
-    
                     $stmt = $this->conn->prepare($insert);
                     $stmt->bindValue(1, $value);
                     $stmt->bindValue(2, $id);
                 }
                 else{
                     $insert = "UPDATE {$this->table_name} SET $string WHERE week_day = ?";
-
                     $stmt = $this->conn->prepare($insert);
                     $stmt->bindValue(1, $id);
                 }
-
                 if(! $stmt->execute()){
                     return [False, $this->conn->lastErrorMsg()];   
                 }
-                
                 return [True, "success"];        
             }
             catch(\SQLite3Exception $e){

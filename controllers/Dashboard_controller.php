@@ -10,9 +10,7 @@
         }
 
         private function render(){
-            $this->cat_obj->update_cat();
             $this->get_cats();
-            $this->req_obj->get_requests();
 
             require_once $_SESSION['root_dir'] . '/views/dashboard.php';
         }
@@ -23,6 +21,7 @@
         }
 
         function get_cats(){
+            $this->cat_obj->update_cat();
             [$state, $data] =  $this->cat_obj->get_categories();
             $_SESSION['categories'] = ($state) ? $data : array();
         }
@@ -56,6 +55,10 @@
                     $this->remove();
                     break;
 
+                case 'edit_category':
+                    $this->edit_cat();
+                    break;
+
                 default:
                     $this->render();
                     break;
@@ -69,29 +72,11 @@
             $this->index();
         }
 
-        private function edit(){
-            // check if any info has been updated
-            $existing_data = array();
-            $id = $_POST['id'];
+        private function edit_cat(){
 
-            foreach($_SESSION['all_corpse'] as $corpse){
-                if ($corpse['id'] = $id){
-                    $existing_data = $corpse;
-                }
-            }
+            $update_string = $this->check_updated_info($_SESSION['categories']);
 
-            $update_string = "";
-            $photo = $this->dsc_obj->set_picture();
-
-            foreach($_POST as $key => $value){
-                if(isset($existing_data[$key])){
-                   if($existing_data[$key] != $value){
-                        $update_string .= $key .' = \''.$value . '\', ';
-                   }
-                }
-            }
-
-            if(! $update_string && ! $photo){
+            if(! $update_string){
                 $_SESSION['dash_msg'] = array( 
                     'status' => false,
                     'msg' => "There is nothing to update"
@@ -99,14 +84,54 @@
                 $this->render();
             }
             else{
-                if($photo){
-                    $update_string .= ' picture = \'' .$photo .'\'';
-                }
-
-                $this->dsc_obj->update_corpse($update_string, $id);
+                $this->cat_obj->update_cat($update_string, $_POST['id']);
                 
                 $this->index();
             }
+        }
+
+        private function check_updated_info($array){
+            // check if any info has been updated
+            $existing_data = array();
+            $id = $_POST['id'];
+
+            foreach($array as $item){
+                if (in_array($id , [$item['id'], $item['cat_id']])){
+                    $existing_data = $item;
+                }
+            }
+
+            $update_string = "";
+            
+            foreach($_POST as $key => $value){
+                if(isset($existing_data[$key])){
+                    if($existing_data[$key] != $value){
+                        $update_string .= $key .'=\''.$value . '\',';
+                    }
+                }
+            }
+
+            return ($update_string) ? substr($update_string, 0, -1) : '';
+        }
+
+        private function edit(){
+            $update_string = $this->check_updated_info($_SESSION['all_corpse']);
+            
+            $photo = $this->dsc_obj->set_picture();
+
+            if(! $update_string){
+                $_SESSION['dash_msg'] = array( 
+                    'status' => false,
+                    'msg' => "There is nothing to update"
+                );
+            }
+            else{
+                if($photo){
+                    $update_string .= ' picture = \'' .$photo .'\'';
+                }
+                $this->dsc_obj->update_corpse($update_string, $_POST['id']);   
+            }
+            $this->render();
         }
 
         private function order(){
