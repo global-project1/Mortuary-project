@@ -1,3 +1,13 @@
+<?php
+    if(!isset($_SESSION['corpse_remover'])){
+        if(!isset($_SESSION['userInfo'])){
+            header("Location: /index");
+            exit();
+        }
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

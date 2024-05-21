@@ -1,27 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="assets/css/request.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body> 
-<div>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <img src="assets/images/img11.jpg">
-    </div>
+    <title>Corpse Scheduling</title>
 
-    <div>
-     <br><br><br><br><br><br><br><br><br><br>
-    <form  method="post"><br>
-    <h1>REQUEST</h1>
-    <input type="text" name="uname" placeholder="enter your name"><br><br>
-    <input type="email" name="email" placeholder="enter your email" ><br><br>
-    <input type="password" name="corpse_id" placeholder="enter corpse_id"><br><br>
-    <input type="date"><br><br>
-    <input type="submit" value="request"><br><br>
+    <link rel="stylesheet" href="assets/css/request.css">
+    <!-- link to font icons -->
+    <link rel="stylesheet" href="assets/font/css/all.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+    
+    <form method="post">
+        <h2>Corpse removal</h2>
+        <?php
+            if(isset($_SESSION['req_error'])){
+                echo "<p class='error_msg'> {$_SESSION['req_error']}</p>";
+                unset($_SESSION['req_error']);
+            }
+        ?>
+
+        <div class="input-section">
+            <label for="corpseId">Corpse ID</label>
+            <input type="text" required name="corpseId" id="corpseId">
+
+        </div>
+        <div class="input-section">
+            <label for="name">Remover Name</label>
+            <input type="text" required name="name" id="name">
+
+        </div>
+        <div class="input-section">
+            <label for="email">Email</label>
+            <input type="text" required name="email" id="email">
+
+        </div>
+        <div class="input-section">
+            <label for="date">Date to remove</label>
+            <input type="date" required name="date" id="date">
+
+        </div>
+
+        <input type="submit" value="submit" name="scheduling">
     </form>
-</div>  
 </body>
 </html>

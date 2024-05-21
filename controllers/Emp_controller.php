@@ -8,15 +8,8 @@
         
         function sel_employee(){
             $login = new Employees;
-            $logins = $login->sel_employee();
+            return $login->sel_employee();
             
-            if($logins){         
-               return true;
-
-            }else{
-                return false;
-            }
-            die;
         }
 
         function updateEmployees(){

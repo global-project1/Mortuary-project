@@ -12,7 +12,6 @@
 
 </head>
 <body>
-    
     <form method="post">
         <h1>Sign in</h1>
         <input type="email" placeholder="Email" name="email" class="email" required><label><i class="fa-solid fa-envelope"></i></label>

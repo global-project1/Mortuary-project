@@ -1,7 +1,7 @@
 <?php
 
     class Deceased extends Base_model{
-        private $conn, $table_name = "Deceased";
+        private $conn, $table_name = "deceased";
 
         function __construct(){
             $this->conn = require $_SESSION['root_dir'] . '/config/dbconn.php';
@@ -83,7 +83,7 @@
             }       
         }
 
-        function read_one($value = null){
+        function read_one($value = null, $condition = null){
             try{
                 $value = $this->conn->escapeString($value);
     

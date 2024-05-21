@@ -35,17 +35,11 @@
                 $result = $stmt->execute();
 
                 if($result){
-                    $result = $result->fetchArray(SQLITE3_ASSOC);  
-                   if($result){
-                        return true;
-                   }
-
-                    return false;
+                    return $result->fetchArray(SQLITE3_ASSOC);  
                 }
                 else{
                     false;
                 }
-
             }
 
             $sql = "SELECT * FROM employees WHERE email = '$email'";

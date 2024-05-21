@@ -1,26 +1,23 @@
 <?php
     class corpseScheduling extends Base_model{
-        private $conn;
+        private $conn, $dsc_obj;
 
         function __construct(){
+            $this->dsc_obj = new Deceased();
             $this->conn = require $_SESSION['root_dir'] . '/config/dbconn.php'; 
         }
 
         function corpse(){
             extract($_POST);
+            $condition = "WHERE id= '$corpseId' AND guardian_email = '$email'";
 
-            $sql = "SELECT id FROM deceased WHERE id= ? AND guardian_email = ?";
-            $stmt = $this->conn->prepare($sql);
+            [$state, $result] = $this->dsc_obj->read($condition);
 
-            $stmt->bindValue(1, $corpseId);
-            $stmt->bindValue(2, $email);
-
-            $result = $stmt->execute();
-
-            if(! $result){
-                return [False, $this->conn->errno];
+            if(! $state){
+                return [False, $this->conn->lastErrorMsg()];
             }
-            $sql = $result->fetchArray(SQLITE3_ASSOC);
+            
+            $sql = $result[0];
 
             if(! empty($sql)){
 
@@ -48,5 +45,6 @@
                 return [false, "not found"];
             } 
         } 
+
     }
 ?>

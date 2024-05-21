@@ -19,12 +19,16 @@
             if(! $signin){
                 $this->home("login");
             }
-           header("Location: /otp");
+            $_SESSION['userInfo'] = $signin;
+
+            header("Location: /otp");
+            exit;
         }
 
         function otp(){
             if(isset($_SESSION['corpse_remover'])){
-                extract($_SESSION['corpse_remover']);
+                $schObj = new Cscheduling_controller();
+                $schedule = $schObj->manage_otp();
 
             }
             else{
@@ -33,9 +37,11 @@
     
                 if($otp){
                    header("Location: /dashboard");
+                   exit;
                 }
                 else{
                     header("Location: /login");
+                    exit;
                 }
             }
         }
@@ -45,15 +51,19 @@
             $schedule = $schObj->corpse();
 
             if($schedule){
-                header("location: /otp");
+                header("Location: /otp");
             }else{
-                header("location: /corpseScheduling");
+                header("Location: /request");
             }
         }
 
         function logout(){
             session_destroy();
             header("Location: /index");
+        }
+
+        function slot(){
+
         }
     }
 ?>

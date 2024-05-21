@@ -4,7 +4,22 @@
         private $photo = null, $dsc_obj, $tmp_dir;
 
         function __construct(){
-            $this->dsc_obj = new Deceased();           
+            $this->dsc_obj = new Deceased();  
+            $this->clear_expired();         
+        }
+
+        private function clear_expired(){
+            [$state, $results] = $this->dsc_obj->read("WHERE otp IS NOT NULL");
+            
+            foreach($results as $res){
+                $time = $res['otp_expire'];
+                if(time() > $time){
+                    $string = "otp = NULL, otp_expire = NULL";
+                    $id = $res['id'];
+
+                    $this->dsc_obj->update($string, $id);
+                }
+            }
         }
 
         function set_picture(){

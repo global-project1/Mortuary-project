@@ -7,10 +7,6 @@
             $this->conn = require $_SESSION['root_dir'] . '/config/dbconn.php';
         }
 
-        function save(){
-
-        }
-
         function read($condition = null){
             try{
                 if ($condition){

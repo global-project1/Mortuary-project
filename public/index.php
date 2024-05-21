@@ -58,12 +58,20 @@
                 $base->home($page = "otp");
             }
             break;
+
+        case in_array($route, ['slot', 'booking']):
+            if($request_method == 'POST'){
+                $base->slot();
+            }else{
+                $base->home($page = "slot");
+            }
+            break;
             
-        case in_array($route, ['corpseScheduling', 'corpse']):
+        case in_array($route, ['request', 'corpse']):
             if($request_method == 'POST'){
                 $base->schedule();
             }else{
-                $base->home($page = "corpseScheduling");
+                $base->home($page = "request");
             }
             break;
 
