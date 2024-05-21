@@ -20,12 +20,14 @@
                 $_SESSION['login_error'] = $signin[1];
 
                 $this->home("login");
+            }else{
+                unset($_SESSION['corpse_remover']);
+                $_SESSION['userInfo'] = $signin;
+    
+                header("Location: /otp");
+                
             }
-            unset($_SESSION['corpse_remover']);
-            $_SESSION['userInfo'] = $signin;
-
-            header("Location: /otp");
-            exit;
+            return;
         }
 
         function otp(){
@@ -39,12 +41,12 @@
     
                 if($otp){
                    header("Location: /dashboard");
-                   exit;
                 }
                 else{
-                    header("Location: /login");
-                    exit;
+                    $_SESSION['otp_error'] = "invalid code";
+                    header("Location: /otp");
                 }
+                exit;
             }
         }
 

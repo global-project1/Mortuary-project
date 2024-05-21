@@ -25,6 +25,12 @@
     <div class="form">
         <form method="post">
             <h1>Enter verification code</h1>
+            <?php
+                if(isset($_SESSION['otp_error'])){
+                    echo "<p class='error_msg'> {$_SESSION['otp_error']}</p>";
+                    unset($_SESSION['otp_error']);
+                }
+            ?>
             <p>Enter 6 Digit OTP code that has been sent to your email</p>
             <label>Enter code here:</label>
             <input type="code" placeholder="Six-Digit code" name="otp" required>

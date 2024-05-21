@@ -32,13 +32,13 @@ use Dotenv\Util\Regex;
                 $_SESSION['req_error'] = $msg;
                 return false;
             }
+            // check if any slot is free for the day he chose
             $chosen = $this->check_slots($_POST['date']);
             if(empty($chosen)){
                 $_SESSION['req_error'] = "Day has no empty slot";
                 return false;
             }
 
-            // check if any slot is free for the day he chose
             $schedules = $this->cs_obj->corpse();
 
             if ($schedules[0]){
@@ -96,21 +96,21 @@ use Dotenv\Util\Regex;
 
             if(! $stats){
                 // redirect the person to choose a slot
-                $_SESSION['req_error'] = $results;
-                header("Location: /request");
-                exit;
+                $_SESSION['otp_error'] = $results;
+                header("Location: /otp");
+            }
+            else{
+                $chosen = $this->check_slots($date);
+                $_SESSION['free_slots'] = $chosen;
+                header("Location: /slot");
             }
 
-            $chosen = $this->check_slots($date);
-
-            $_SESSION['free_slots'] = $chosen;
-            
-            header("Location: /slot");
             exit();
         }
 
         function save_chosen_slot(){
             $date = $_SESSION['corpse_remover']['date'];
+            $corpse_id = $_SESSION['corpse_remover']['corpseId'];
             $expiry_date = new DateTime($date);
             $week_number = date_format($expiry_date, "W");
             $expiry_day = date_format($expiry_date, "l");
@@ -130,6 +130,7 @@ use Dotenv\Util\Regex;
             $new_dt = [
                 "week_number" => $week_number,
                 "date_of_activation" => date("Y-m-d"),
+                "corpse_id" => $corpse_id,
                 "duration" => $duration,
                 "expiry_date" => $date,
                 "status" => true
@@ -146,7 +147,7 @@ use Dotenv\Util\Regex;
 
             [$status, $msg] = $this->req_obj->update_request($chosen, $slot, $expiry_day);
 
-            return $status;
+            return $status ?? NULL;
         }
     }
 ?>

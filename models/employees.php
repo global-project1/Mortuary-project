@@ -36,7 +36,6 @@
         
         function read(){
             extract($_POST);
-
             if(isset($_POST['otp'])){
                 $email = $_SESSION['email'];
 
@@ -67,7 +66,7 @@
                 $otp = rand(100000, 999999);
                 $otpExpire = date("Y-m-d H:i:s", strtotime("+30 minute"));
                 $title = "Enter your OTP for login";
-                $message = "Your  OTP is:$otp";
+                $message = "Your OTP code is: $otp";
 
                 $msg = $this->send_mail($email, $title, $message);
 
@@ -82,11 +81,11 @@
                     $_SESSION['email'] = $email;
                     return [true, "otp successfully saved"];
                 }
-                return [false, 'mail sent but otp did not save'];
+                return [false, 'mail sent but otp code did not save'];
+            }else{
+                return [False, 'Incorrect credentials'];  
 
             }
-
-            return [False, 'Incorrect credentials'];  
         }
 
     }

@@ -16,11 +16,9 @@
             if(! $state){
                 return [False, $this->conn->lastErrorMsg()];
             }
-            
-            $sql = $result[0];
+            $sql = $result;
 
             if(! empty($sql)){
-
                 $otp = rand(100000, 999999);
                 $otpExpire = strtotime(date("Y-m-d H:i:s", strtotime("+60 minute")));
                 

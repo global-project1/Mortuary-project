@@ -7,8 +7,7 @@
         }
         
         function sel_employee(){
-            return $this->emp_obj->read();
-            
+            return $this->emp_obj->read();   
         }
     }
 ?>

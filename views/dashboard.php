@@ -49,34 +49,31 @@
 <body>
     <header class='header'>
         <h2>Dashboard</h2>
-
         <div class='header_search'>  
-        <form action="" method="POST">
-            <input type="hidden" name="option" value="search">
-            <input type="text" placeholder="Search for corpse by name" name="search" /> 
-            <button type="submit">
-                <i class="fas fa-search" title="search"></i>
-            </button>  
-        </form>  
-        </div>
-
+            <form action="" method="POST">
+                <input type="hidden" name="option" value="search">
+                <input type="text" placeholder="Search for corpse by name" name="search" /> 
+                <button type="submit">
+                    <i class="fas fa-search" title="search"></i>
+                </button>  
+            </form>  
+         </div>
+         
         <button disabled={true} class='notif_btn'>
-            <i class="fas fa-bell" title="cart" id="cart">
+             <i class="fas fa-bell" title="cart" id="cart">
                 <span id="pd_qnty_num">
-                2
+                    2
                 </span>
             </i>
         </button>
-
+            
+        <i class="fas fa-circle-info modify" title="display page crews"></i>
         <a href="/logout" class="logout">
             <i class="fas fa-power-off"></i>
             <span>
                 Logout
             </span>
         </a>
-
-        <i class="fas fa-circle-info modify" title="display page crews"></i>
-
     </header>
 
     <nav>

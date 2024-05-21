@@ -28,6 +28,7 @@
                                     $new_dt = array([
                                         "week_number" => null,
                                         "date_of_activation" => null,
+                                        "corpse_id" => null,
                                         "duration" => $week_block->duration,
                                         "expiry_date" => null,
                                         "status" => false
@@ -70,6 +71,7 @@
             //     $key = $days[$i];
             //     $new_dt = array([
             //         "week_number" => null,
+            //         "corpse_id" =>null,
             //         "date_of_activation" => null,
             //         "duration" => "15:30:00-17:00:00",
             //         "expiry_date" => null,
