@@ -66,19 +66,17 @@
                 $base->home($page = "slot");
             }
             break;
-            
+
         case in_array($route, ['request', 'corpse']):
             if($request_method == 'POST'){
                 $base->schedule();
             }else{
                 $base->home($page = "request");
             }
-            break;
 
         default:
             $base->home($page = "index");
             break;
-
 
     }   
 

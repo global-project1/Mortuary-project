@@ -7,20 +7,15 @@
         }
         
         function sel_employee(){
-            $login = new Employees;
-            return $login->sel_employee();
+            $logins = $this->emp_obj->sel_employee();
             
-        }
+            if($logins){         
+               return true;
 
-        function updateEmployees(){
-            $login = new Employees;
-            $logins = $login->sel_employee();
-
-            if($logins){
-                header("location: dashboard");
             }else{
-                header("location: otp");
+                return false;
             }
-        }    
+            die;
+        }
     }
 ?>

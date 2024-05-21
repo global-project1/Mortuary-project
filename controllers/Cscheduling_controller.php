@@ -79,13 +79,11 @@
                     }
                 }
             }
-
             return $chosen;
 
             echo $result[$chosen];
             die;
             header("Location: /slot");
-             
         }
     }
 ?>

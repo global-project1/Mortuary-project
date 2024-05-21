@@ -8,17 +8,38 @@
         }
 
         function add_employee(){
-            try{
-                $sql = "INSERT INTO {$this->table_name}(employee_id, email, password, name)
-                VALUES('01PRO2015', 'afegenuim@gmail.com', 'school@.com1', 'Milos Gs'),
-                ('02PRO2015', '')";
-    
-                $results = $this->conn->exec($sql);
-                return true;    
-                
-            }catch(SQLite3Exception $e){
-                return false;
-            }
+
+            $names = array(
+
+
+            );
+       
+                foreach ($names as $name) {
+                    try{
+                        extract($name);
+                        $pass = password_hash($password, PASSWORD_DEFAULT);
+
+                        $sql = "INSERT INTO {$this->table_name}(employee_id, email, password, name)
+                        VALUES('$employee_id', '$email', '$pass', '$name')";
+
+                        $results = $this->conn->exec($sql);
+                        
+                        if(!$results){
+                            echo $this->conn->lastErrorMsg();
+                        }
+ 
+                        $title = "Enter this password while Signing in";
+                        $message = "Your password is: $password and your matricule is:$employee_id";
+                        $msg = $this->send_mail($email, $title, $message);
+
+                        if(! $msg[0]){
+                            return [false, $msg[1]];
+                        }
+                    }catch(SQLite3Exception $e){
+                        return false;
+                    }
+                }   
+                return true;
         }
         
         function sel_employee(){
@@ -28,7 +49,6 @@
                 $email = $_SESSION['email'];
 
                 $sql = "SELECT * FROM employees WHERE email = ? AND otp = ?";
-
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bindValue(1, $email);
                 $stmt->bindValue(2, $otp);
