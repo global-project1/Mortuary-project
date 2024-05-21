@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@400;500;600;700;800&family=Prata&family=Shadows+Into+Light&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+
+form{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    border: none;
+    box-shadow: 1px 1px 3px rgba(10, 10, 10, 0.2);
+    padding: 20px;
+    gap: 15px;
+    margin: auto;
+    
+    .select-input{
+        display: flex;
+        align-items: center;
+        gap: 5%;
+        
+    }
+    select{
+        width: 100%;
+        padding: 2%;
+        outline: rgb(46, 118, 212);
+    }
+}
+
+form input[type="submit"]{
+    height: 50px;
+    transition: 0.3s;
+    color: aliceblue;
+    font-size: 1.2em;
+    letter-spacing: 0.05em;
+    background: rgb(46, 118, 212);
+    border: none;
+    border-radius: 10px;
+}

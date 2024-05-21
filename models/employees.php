@@ -8,38 +8,30 @@
         }
 
         function add_employee(){
+            try{
+                extract($name);
+                $pass = password_hash($password, PASSWORD_DEFAULT);
 
-            $names = array(
+                $sql = "INSERT INTO {$this->table_name}(employee_id, email, password, name)
+                VALUES('$employee_id', '$email', '$pass', '$name')";
 
+                $results = $this->conn->exec($sql);
+                
+                if(!$results){
+                    echo $this->conn->lastErrorMsg();
+                }
 
-            );
-       
-                foreach ($names as $name) {
-                    try{
-                        extract($name);
-                        $pass = password_hash($password, PASSWORD_DEFAULT);
+                $title = "Enter this password while Signing in";
+                $message = "Your password is: $password and your matricule is:$employee_id";
+                $msg = $this->send_mail($email, $title, $message);
 
-                        $sql = "INSERT INTO {$this->table_name}(employee_id, email, password, name)
-                        VALUES('$employee_id', '$email', '$pass', '$name')";
-
-                        $results = $this->conn->exec($sql);
-                        
-                        if(!$results){
-                            echo $this->conn->lastErrorMsg();
-                        }
- 
-                        $title = "Enter this password while Signing in";
-                        $message = "Your password is: $password and your matricule is:$employee_id";
-                        $msg = $this->send_mail($email, $title, $message);
-
-                        if(! $msg[0]){
-                            return [false, $msg[1]];
-                        }
-                    }catch(SQLite3Exception $e){
-                        return false;
-                    }
-                }   
-                return true;
+                if(! $msg[0]){
+                    return [false, $msg[1]];
+                }
+            }catch(SQLite3Exception $e){
+                return false;
+            }
+            return true;
         }
         
         function sel_employee(){

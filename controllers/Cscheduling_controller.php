@@ -28,6 +28,12 @@
                 $_SESSION['req_error'] = $msg;
                 return false;
             }
+            $chosen = $this->check_slots($_POST['date']);
+            if(empty($chosen)){
+                $_SESSION['req_error'] = "Day has no empty slot";
+                return false;
+            }
+
             // check if any slot is free for the day he chose
             $schedules = $this->cs_obj->corpse();
 
@@ -42,7 +48,38 @@
             }
         }
 
+        function check_slots($date){
+            // set the slots
+            $date_obj = new DateTime($date);
+            $week_number = date_format($date_obj, "W");
+            $day = date_format($date_obj, "l");
+
+            $req_obj = new Request_controller();
+
+            $result = $req_obj->get_request($day);
+
+            $chosen = array();
+            echo '<pre>';
+            foreach($result as $slot => $res){
+                $arr = json_decode($res);
+                $dur = $arr[0]->duration;
+                $tester = false;
+
+                foreach($arr as $r){
+                    if($r->week_number != $week_number){
+                        $tester = true;
+                    }
+                }
+                if($tester){
+                    array_push($chosen, [$slot, $dur]);
+                }
+            }
+            
+            return $chosen;
+        }
+
         function manage_otp(){
+
             extract($_SESSION['corpse_remover']);
 
             $dec_obj = new Deceased_controller();
@@ -58,32 +95,12 @@
                 exit;
             }
             
-            // set the slots
-            $date_obj = new DateTime($date);
-            $week_number = date_format($date_obj, "W");
-            $day = date_format($date_obj, "l");
+            $chosen = $this->check_slots($date);
 
-            $req_obj = new Request_controller();
-
-            $result = $req_obj->get_request($day);
-
-            echo '<pre>';
-
-            $chosen = false;
-          
-            foreach($result as $slot => $res){
-                $arr = json_decode($res);
-                foreach($arr as $r){
-                    if($r->week_number != $week_number){
-                        $chosen = $slot;
-                    }
-                }
-            }
-            return $chosen;
-
-            echo $result[$chosen];
-            die;
+            $_SESSION['free_slots'] = $chosen;
+            
             header("Location: /slot");
+            exit();
         }
     }
 ?>

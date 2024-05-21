@@ -10,6 +10,9 @@
 
         private function clear_expired(){
             [$state, $results] = $this->dsc_obj->read("WHERE otp IS NOT NULL");
+            if(empty($results)){
+                unset($_SESSION['corpse_remover']);
+            }
             
             foreach($results as $res){
                 $time = $res['otp_expire'];
@@ -17,7 +20,7 @@
                     $string = "otp = NULL, otp_expire = NULL";
                     $id = $res['id'];
 
-                    $this->dsc_obj->update($string, $id);
+                   $state = $this->dsc_obj->update($string, $id);
                 }
             }
         }

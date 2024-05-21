@@ -41,7 +41,7 @@
                 }
             }
         }
-        
+
         function get_requests($cond = null){
             [$status, $data] = $this->req_obj->read($cond);
 
@@ -63,10 +63,23 @@
             return $this->req_obj->read_one($value);
         }
 
-        function update_request($array, $col, $key){
-            $array = json_encode($array);
+        function update_request($array = null, $col = null, $key = null){
+            // $days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-            $string = $col. " = '$array'";
+            // for($i = 0; $i < count($days); $i++){
+            //     $key = $days[$i];
+            //     $new_dt = array([
+            //         "week_number" => null,
+            //         "date_of_activation" => null,
+            //         "duration" => "15:30:00-17:00:00",
+            //         "expiry_date" => null,
+            //         "status" => false
+            //     ]);
+
+            // }
+            $array = json_encode($array);
+            $string =  $col. " = '$array'";
+
             $this->req_obj->update($string, $key);          
         }
     }

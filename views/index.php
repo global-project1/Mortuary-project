@@ -7,12 +7,19 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="div2"><h1>WELCOME TO HEAVENS</h1>
+    <div id="div2"><h1>WELCOME TO HEAVENS PORTAL</h1>
         <P><i> where your souls rest in peace</i></P>
     </div>
-    <!-- <img src="assets/images/l22a2.jpg" id="img" ><br> -->
-    <a href="/login">signin</a>
-    <a href="/corpse">Remove a corpe</a>
+    <div class="img">
+        <img src="assets/images/cross3.png" id="img" ><br>
+
+    </div>
+
+    <div class="links">
+        <a href="/login">signin</a>
+        <a href="/request">Remove a corpe</a>
+
+    </div>
     
 </body>
 </html>

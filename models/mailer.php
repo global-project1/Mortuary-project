@@ -24,7 +24,7 @@
     ];
 
     $mail->isHTML(true);
-    $mail->setFrom('HG@example.com', "Heaven's gate");
+    $mail->setFrom('HG@example.com', "Heaven's Portal");
 
     return $mail;
 

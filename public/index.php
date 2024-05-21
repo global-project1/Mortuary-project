@@ -73,6 +73,7 @@
             }else{
                 $base->home($page = "request");
             }
+            break;
 
         default:
             $base->home($page = "index");

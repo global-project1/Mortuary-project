@@ -1,39 +1,61 @@
-body{
-    background: url(../images/l22a2.jpg) no-repeat;
-    background-size: cover;
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@400;500;600;700;800&family=Prata&family=Shadows+Into+Light&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+*{
+    padding: 0;
     margin: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+}
+
+body{
+    background: url(../images/img13.jpg) no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    
+    place-items: center;
+    gap: 5%;
 }
 #div2{
-    
     justify-content: center;
     text-align: center;
     
+    h1{
+        font-size: 4em;
+        font-family: 'Prata';
+        color: white;
+    }
+    p{
+        font-size: 20px;
+        color: gold;
+    }
 }
-h1{
-    font-size: 75px;
-    color: white;
-}
-p{
-    font-size: 20px;
-    color: gold;
-}
-a{
-    border-radius: 20% ;
-    border: 5px solid grey;
-    width: 100px;
-    height: 50px;
-    background-color: grey;
-    margin-top:  10%;
-}
-a:hover{
-    color: gold;
+
+.links {
+    display: flex;
+    width: 20%;
+    gap: 10px;
+    a{  
+        flex: 1;
+        text-align: center;
+        border-radius: 5px;
+        font-size: 1.1em;
+        background: orange;
+        color: white;
+        padding: 8px 12px;
+        
+    }
 
 }
-img{
-    position: relative;
-       top: 20%;
-}
+
+
+
