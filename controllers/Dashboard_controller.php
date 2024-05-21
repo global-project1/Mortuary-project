@@ -109,6 +109,7 @@
             foreach($_POST as $key => $value){
                 if(isset($existing_data[$key])){
                     if($existing_data[$key] != $value){
+                        $value = addslashes($value);
                         $update_string .= $key .'=\''.$value . '\',';
                     }
                 }

@@ -7,15 +7,8 @@
         }
         
         function sel_employee(){
-            $logins = $this->emp_obj->sel_employee();
+            return $this->emp_obj->read();
             
-            if($logins){         
-               return true;
-
-            }else{
-                return false;
-            }
-            die;
         }
     }
 ?>

@@ -80,7 +80,7 @@
             $array = json_encode($array);
             $string =  $col. " = '$array'";
 
-            $this->req_obj->update($string, $key);          
+            return $this->req_obj->update($string, $key);          
         }
     }
 

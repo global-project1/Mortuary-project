@@ -27,7 +27,7 @@
             <h1>Enter verification code</h1>
             <p>Enter 6 Digit OTP code that has been sent to your email</p>
             <label>Enter code here:</label>
-            <input type="code" placeholder="Six-Digit code" name="otp">
+            <input type="code" placeholder="Six-Digit code" name="otp" required>
             <input type="submit" value="submit" name="otpSubmit" class="submit">
         </form>
     </div>

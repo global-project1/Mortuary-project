@@ -13,10 +13,40 @@
 </head>
 <body>
     <form method="post">
-        <h1>Sign in</h1>
-        <input type="email" placeholder="Email" name="email" class="email" required><label><i class="fa-solid fa-envelope"></i></label>
-        <input type="text" placeholder="Matricule" name="matricule" class="matricule" required><label class="label3"><i class="fa-solid fa-person"></i></label>
-        <input type="password" placeholder="Password" name="password" class="password" required><label class="label4"><i class="fa-solid fa-eye"></i></label>
+        <h1>Sign In</h1>
+        <?php
+            if(isset($_SESSION['login_error'])){
+                echo "<p class='error_msg'> {$_SESSION['login_error']}</p>";
+                unset($_SESSION['login_error']);
+            }
+        ?>
+        <div class="input-sect">
+            <input type="text" placeholder="Name" name="name" class="name" required>
+            <label>
+                <i class="fa-solid fa-user"></i>
+            </label>
+        </div>
+
+        <div class="input-sect">
+            <input type="email" placeholder="Email" name="email" class="email" required>
+            <label>
+                <i class="fa-solid fa-envelope"></i>
+            </label>
+        </div>
+
+        <div class="input-sect">
+            <input type="text" placeholder="Matricule" name="matricule" class="matricule" required>
+            <label>
+                <i class="fa-solid fa-person"></i>
+            </label>
+        </div>
+
+        <div class="input-sect">
+            <input type="password" placeholder="Password" name="password" class="password" required>
+            <label>
+                <i class="fa-solid fa-eye"></i>
+            </label>
+        </div>
 
         <input type="submit" value="Login" name="login">
     </form>    

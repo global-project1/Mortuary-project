@@ -1,9 +1,13 @@
 <?php
+
+use Dotenv\Util\Regex;
+
     class Cscheduling_controller{
         private $cs_obj, $req_obj;
 
         function __construct(){
             $this->cs_obj = new corpseScheduling();
+            $this->req_obj = new Request_controller();
         }
         
         private function check_date(){
@@ -54,9 +58,7 @@
             $week_number = date_format($date_obj, "W");
             $day = date_format($date_obj, "l");
 
-            $req_obj = new Request_controller();
-
-            $result = $req_obj->get_request($day);
+            $result = $this->req_obj->get_request($day);
 
             $chosen = array();
             echo '<pre>';
@@ -66,13 +68,17 @@
                 $tester = false;
 
                 foreach($arr as $r){
-                    if($r->week_number != $week_number){
+                    if($r->week_number == $week_number){
                         $tester = true;
                     }
                 }
-                if($tester){
+                if(! $tester){
                     array_push($chosen, [$slot, $dur]);
                 }
+            }
+
+            if(!empty($chosen)){
+                $_SESSION['slot_information'] = $result;
             }
             
             return $chosen;
@@ -94,13 +100,53 @@
                 header("Location: /request");
                 exit;
             }
-            
+
             $chosen = $this->check_slots($date);
 
             $_SESSION['free_slots'] = $chosen;
             
             header("Location: /slot");
             exit();
+        }
+
+        function save_chosen_slot(){
+            $date = $_SESSION['corpse_remover']['date'];
+            $expiry_date = new DateTime($date);
+            $week_number = date_format($expiry_date, "W");
+            $expiry_day = date_format($expiry_date, "l");
+            $slot = $_POST['slot'];
+
+            $chosen = json_decode($_SESSION['slot_information'][$slot]);
+
+            $verify = true;
+            $len = count($chosen);
+            for ($i = 0; $i < $len; $i++){
+                $duration = $chosen[$i]->duration;
+                if(! $chosen[$i]->week_number){
+                    $verify = false;
+                }
+            }
+
+            $new_dt = [
+                "week_number" => $week_number,
+                "date_of_activation" => date("Y-m-d"),
+                "duration" => $duration,
+                "expiry_date" => $date,
+                "status" => true
+            ];
+
+            if($verify){
+                // append
+                array_push($chosen, $new_dt);
+            }
+            else{
+                // replace
+                $chosen = array($new_dt);
+            }
+
+            [$status, $msg] = $this->req_obj->update_request($chosen, $slot, $expiry_day);
+
+            return $status;
         }
     }
 ?>

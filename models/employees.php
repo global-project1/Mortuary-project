@@ -34,7 +34,7 @@
             return true;
         }
         
-        function sel_employee(){
+        function read(){
             extract($_POST);
 
             if(isset($_POST['otp'])){
@@ -50,7 +50,7 @@
                     return $result->fetchArray(SQLITE3_ASSOC);  
                 }
                 else{
-                    false;
+                    return false;
                 }
             }
 
@@ -63,7 +63,7 @@
 
             $sql = $query->fetchArray(SQLITE3_ASSOC);  
 
-            if($password === $sql['password']){
+            if(password_verify($password, $sql['password'])){
                 $otp = rand(100000, 999999);
                 $otpExpire = date("Y-m-d H:i:s", strtotime("+30 minute"));
                 $title = "Enter your OTP for login";
@@ -86,7 +86,7 @@
 
             }
 
-            return [False, 'login failed'];  
+            return [False, 'Incorrect credentials'];  
         }
 
     }

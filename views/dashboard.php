@@ -1,6 +1,14 @@
 <?php
 
+    if(!isset($_SESSION['userInfo'])){
+        header("Location: /index");
+        exit;
+    }
+
     $requests = $_SESSION['requests'];
+    $week_num = new DateTime();
+    $week_num = date_format($week_num, "W");
+
     $categories = $_SESSION['categories'];
     $corpse = $_SESSION['corpse'] ?? [];
 
@@ -23,7 +31,6 @@
         ($gender === 'M') ? $males++ : $females++;
         (age($DOB, $DOD) <= 18) ? $young++ : $adult++;
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -492,14 +499,22 @@
                     <?php foreach($day as $name => $slot): ?>
                         <td><?=$name?></td>
 
-                        <?php foreach($slot as $data):                   
-                            if($data->status){
-                                echo "<td> <i class='fas fa-square-check'></i></td>";
-                            }
-                            else{
-                                echo "<td></td>";
-                            }
-                          endforeach; ?>
+                        <?php 
+                            foreach($slot as $data){
+                                $found = false;
+                                for($i = 0; $i < count($data); $i ++){
+                                    if ($data[$i]->week_number == $week_num){
+                                        $found = true;
+                                    }
+                                }
+                                if($found){
+                                    echo "<td> <i class='fas fa-square-check'></i></td>";
+                                }
+                                else{
+                                    echo "<td></td>";
+                                }
+                            }                 
+                        ?>
                     <?php endforeach; ?>
                 </tr>
                 <?php 
@@ -507,8 +522,7 @@
                 ?>
             </table>
         </div>
-
-        
+ 
     </article>
     <script src="assets/JS/imgPreview.js"></script>
     <script src="assets/JS/dashboard.js"></script>

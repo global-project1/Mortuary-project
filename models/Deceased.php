@@ -12,10 +12,10 @@
             $key = $this->generate_key();
 
             try{
-                $insert = "INSERT INTO {$this->table_name} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $insert = "INSERT INTO {$this->table_name} VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 $stmt = $this->conn->prepare($insert);
-                $array = array($key, $fname, $lname, $occupation, $marital_status, $gender, $DOB, $DOD, $POD, $cause, $deposit_date, $removal_date, $photo, $cat_id, $guardian_name, $guardian_email, $guardian_relation);
+                $array = array($key, $fname, $lname, $occupation, $marital_status, $gender, $DOB, $DOD, $POD, $cause, $deposit_date, $removal_date, $photo, $cat_id, $guardian_name, $guardian_email, $guardian_relation, NULL, NULL);
 
                 for($i = 0; $i < count($array); $i++){
                     $stmt->bindValue($i+1, $array[$i]);
@@ -26,7 +26,7 @@
                 }
                 else{
                     // Send the email
-                    $title = "Enter ";
+                    $title = "Corpse ID";
                     $message = 
                     <<<EOF
                     The registered corp ID for $fname $lname is <br>
@@ -72,6 +72,10 @@
                     array_push($results, $row);
                 }
                 // Set the global variable
+
+                if(empty($results)){
+                    return [false, "no record found"];
+                }
                 if(! $condition){
                     $_SESSION['all_corpse'] = $results;
                 }
@@ -112,7 +116,7 @@
         }
 
         function update($string, $id){    
-            try{
+            try{    
                 $insert = "UPDATE {$this->table_name} SET $string WHERE id = ?";
 
                 $stmt = $this->conn->prepare($insert);
