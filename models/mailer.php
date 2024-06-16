@@ -27,5 +27,4 @@
     $mail->setFrom('HG@example.com', "Heaven's Portal");
 
     return $mail;
-
 ?>

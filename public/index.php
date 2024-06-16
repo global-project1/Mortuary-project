@@ -58,7 +58,7 @@
                 $base->home($page = "otp");
             }
             break;
-
+            
         case in_array($route, ['slot', 'booking']):
             if($request_method == 'POST'){
                 $base->slot();
@@ -72,6 +72,14 @@
                 $base->schedule();
             }else{
                 $base->home($page = "request");
+            }
+            break;
+
+        case $route == 'password':
+            if($request_method == 'POST'){
+                $base->pass();
+            }else{
+                $base->home($page = "password");
             }
             break;
 

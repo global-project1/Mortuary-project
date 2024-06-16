@@ -15,7 +15,6 @@
                     foreach($value as $val => $slot){
                         foreach($slot as $week_block){
                             if($week_block->status){
-    
                                 $now = time();
                                 $date = new DateTime($week_block->expiry_date);   
                                 $date_format = $date->format("Y-m-d"); 

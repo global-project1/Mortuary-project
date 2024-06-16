@@ -12,6 +12,7 @@
             [$state, $results] = $this->dsc_obj->read("WHERE otp IS NOT NULL");
             if(empty($results)){
                 unset($_SESSION['corpse_remover']);
+                return;
             }
             
             foreach($results as $res){

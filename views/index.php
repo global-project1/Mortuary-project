@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="assets/css/index.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Heaven's Portal</title>
 </head>
 <body>
     <div id="div2"><h1>WELCOME TO HEAVENS PORTAL</h1>
@@ -16,10 +16,8 @@
     </div>
 
     <div class="links">
-        <a href="/login">signin</a>
+        <a href="/login">Sign In</a>
         <a href="/request">Remove a corpe</a>
-
     </div>
-    
 </body>
 </html>

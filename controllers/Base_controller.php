@@ -25,7 +25,6 @@
                 $_SESSION['userInfo'] = $signin;
     
                 header("Location: /otp");
-                
             }
             return;
         }
@@ -80,6 +79,13 @@
                 $_SESSION['req_error'] = "an Error occured while setting schedule";
                 header("Location: /request");
             }
+        }
+
+        function pass(){
+            echo '<pre>';
+            print_r($_POST);
+
+            exit();
         }
     }
 ?>

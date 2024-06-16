@@ -1,11 +1,10 @@
 <?php
-    if(!isset($_SESSION['corpse_remover'])){
-        if(!isset($_SESSION['userInfo'])){
+    if(!isset($_SESSION['corpse_remover']) || empty($_SESSION['corpse_remover'])){
+        if(!isset($_SESSION['userInfo']) || empty($_SESSION['userInfo'])){
             header("Location: /index");
             exit();
         }
     }
-
 ?>
 
 <!DOCTYPE html>

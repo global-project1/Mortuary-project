@@ -2,7 +2,7 @@
 
     class Base_model{
         protected function generate_key(){
-            $string = "M@RTUADY";
+            $string = "zM@rTuAqY";
 
             $id = 1;
             $old_id = $_SESSION['root_dir']. '/models/storage/key.txt';

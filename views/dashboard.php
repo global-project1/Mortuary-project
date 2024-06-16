@@ -1,10 +1,9 @@
 <?php
-
     if(!isset($_SESSION['userInfo'])){
         header("Location: /index");
         exit;
     }
-
+    
     $requests = $_SESSION['requests'];
     $week_num = new DateTime();
     $week_num = date_format($week_num, "W");
